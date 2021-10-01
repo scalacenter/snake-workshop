@@ -2,7 +2,9 @@
 # Scala Snake
 
 This workshop leads participants in building a simple Snake game that runs in
-the browser.  It uses Scala 3 and Scala.js
+the browser.  It uses Scala 3 and Scala.js and looks like this:
+
+![screenshot](screenshot.png)
 
 ## Requirements
 
