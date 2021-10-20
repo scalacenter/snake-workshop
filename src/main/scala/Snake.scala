@@ -15,25 +15,26 @@ enum Direction:
 
 case class Node(x: Int, y: Int)
 
-case class Snake(dir: Direction, nodes: List[Node])
+case class Snake(direction: Direction, head: Node, body: List[Node])
 
 case class World(snake: Snake, fruit: Fruit, height: Int, width: Int)
 
-enum UserInput:
-  case Arrow(direction: Direction)
-  case Reset
-  case Pause
-/////
+case object GameOver
 
-def score(world: World): Int = world.snake.nodes.length - 1
+enum UserInput:
+  case Arrow(direction: Direction) // An arrow key was pressed
+  case Pause // The pause key was pressed
+  case Reset // The reset key was pressed
+  case Empty // No input was recieved this tick
+
+def score(world: World): Int = world.snake.body.length - 1
 
 //// WORKSHOP PARTICIPANTS WORK HERE:
 
+// student
 def bitItself(snake: Snake): Boolean =
-  snake match
-    case Snake(_, body) if body.length <= 4 => false
-    case Snake(_, head :: tail) =>
-      tail.exists(node => node == head)
+  if snake.body.length <= 3 then false
+  else snake.body.contains(snake.head)
 
 // student
 def wrap(x: Int, min: Int, max: Int) =
@@ -41,45 +42,64 @@ def wrap(x: Int, min: Int, max: Int) =
   else if x < min then max - 1
   else x
 
-case object GameOver
-def onTick(world: World, userInput: Option[UserInput]): World | GameOver.type =
-  val World(snake @ Snake(dir, nodes @ head :: _), fruit, height, width) = world
+// student
+def nextDirection(previous: Direction, input: UserInput): Direction =
+  input match
+    case UserInput.Arrow(next) => next
+    case _                     => previous
 
-  val newDirection: Direction = userInput
-    .flatMap {
-      case UserInput.Arrow(dir) => Some(dir)
-      case _                    => None
-    }
-    .getOrElse(dir)
+// student
+def nextHead(head: Node, facing: Direction, height: Int, width: Int): Node =
+  facing match
+    case Direction.Up    => head.copy(y = wrap(head.y - 1, 0, height))
+    case Direction.Down  => head.copy(y = wrap(head.y + 1, 0, height))
+    case Direction.Left  => head.copy(x = wrap(head.x - 1, 0, width))
+    case Direction.Right => head.copy(x = wrap(head.x + 1, 0, width))
 
-  // student
-  val newFruit =
-    if fruit.x == head.x && fruit.y == head.y then
-      Fruit.createRandom(width, height)
-    else fruit
+// student (consider cheatsheet for list methods)
+def nextBody(snake: Snake, isEating: Boolean): List[Node] =
+  val newBody = snake.head :: snake.body
+  if isEating then newBody
+  else newBody.dropRight(1)
 
-  // student
-  val newTail =
-    if newFruit == fruit then nodes.dropRight(1)
-    else nodes
+// student
+def eatsFruit(snake: Snake, fruit: Fruit): Boolean =
+  fruit.x == snake.head.x && fruit.y == snake.head.y
 
-  // student
-  val newHead = newDirection match
-    case Direction.Up    => head.copy(y = wrap(head.y - 1, 0, world.height))
-    case Direction.Down  => head.copy(y = wrap(head.y + 1, 0, world.height))
-    case Direction.Left  => head.copy(x = wrap(head.x - 1, 0, world.width))
-    case Direction.Right => head.copy(x = wrap(head.x + 1, 0, world.width))
+def nextWorld(world: World, input: UserInput): World | GameOver.type =
+  val World(
+    snake @ Snake(direction, head, _),
+    fruit,
+    height,
+    width
+  ) = world
 
-  val newSnake = Snake(newDirection, newHead :: newTail)
+  input match
+    case UserInput.Pause       => world
+    case UserInput.Reset       => GameOver
+    case _ if bitItself(snake) => GameOver
+    case _ =>
+      val isEating = eatsFruit(snake, fruit)
 
-  if bitItself(snake) then GameOver
-  else
-    println(newSnake)
-    World(newSnake, newFruit, height, width)
+      val newFruit =
+        if isEating then Fruit.createRandom(width, height) else fruit
+
+      val newDirection = nextDirection(direction, input)
+      val newHead = nextHead(head, newDirection, width, height)
+      val newBody = nextBody(snake, isEating)
+
+      val newSnake = Snake(newDirection, newHead, newBody)
+
+      world.copy(snake = newSnake, fruit = newFruit)
+
+end nextWorld
 
 /*
  * end of workshop. BUT time for expansion. Possible ideas:
  - Better graphics: images, colors, text, effects
  - Richer game engine: accelerate after fruit, fruits with different weight,
                        walls etc
+ - toggle pause
+ - context parameter for canvas context
+ - make snake always have a head?
  */
