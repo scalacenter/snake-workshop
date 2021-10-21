@@ -25,12 +25,6 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/scalacenter/snake-workshop/edit/website/website',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/scalacenter/snake-workshop/edit/website/website/blog',
-        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -54,7 +48,6 @@ const config = {
             position: 'left',
             label: 'Tutorial',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/scalacenter/snake-workshop',
             label: 'GitHub',
