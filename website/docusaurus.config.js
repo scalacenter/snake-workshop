@@ -44,9 +44,9 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'installation/intro',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Install Party',
           },
           {
             href: 'https://github.com/scalacenter/snake-workshop',
@@ -62,8 +62,8 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Install Party',
+                to: '/docs/installation/intro',
               },
             ],
           },
@@ -103,6 +103,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages : ['java', 'scala']
       },
     }),
 };
