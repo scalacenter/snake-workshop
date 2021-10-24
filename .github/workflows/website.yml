@@ -25,6 +25,7 @@ jobs:
             npm i
           fi
           npm run build
+        working-directory: website
   gh-release:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
@@ -51,4 +52,5 @@ jobs:
             npm i
           fi
           npm run deploy
+        working-directory: website
 
