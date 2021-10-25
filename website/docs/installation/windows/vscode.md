@@ -2,57 +2,57 @@
 sidebar_position: 2
 ---
 
-# VS Code - TODO
+# VS Code
 
-In this section we will install VS Code and two extensions:
+:::caution
+This page is reserved for **Windows** users. Instructions for other operating system can be found in:
+- [**Install - Linux**](../linux/vscode)
+- [**Install - Mac**](../mac/vscode)
+:::
+
+In this page we will install VS Code and two extensions:
 - Metals: the Scala language extension
 - Live Share: an extension that enables collaborative session on the same code.
 
 ## Install VS Code
 
-1. Go to https://code.visualstudio.com/Download
-2. Download the `.deb` package.
-3. Open the terminal
-4. Install the downloaded package
+#### 1. Go to Visual Studio [download page](https://code.visualstudio.com/Download) and Click on the Windows download button:
 
-```bash
-sudo apt install <.deb file>
-```
+![Download VS Code](/img/installation/windows/vscode-download.png)
 
-where `<.deb file>` is the path of the downloaded package.
-Typically it would be:
+#### 2. Execute the downloaded `VSCodeUserSetup-x64-1.61.2.exe` file.
 
-```bash
-sudo apt install ~/Downloads/code_1.61.2-1634656828_amd64.deb
-```
+#### 3. Follow the installation steps:
+- Read and accept the agreement.
+- Click `Next` several times to keep all the default options.
+- Click `Install`.
+- Click `Finish`.
 
-4. Check that Visual Studio Code is succefully installed
-
-```bash
-code -v
-```
-
-It should print something like,
-```
-1.61.2
-6cba118ac49a1b88332f312a8f67186f7f3c1643
-x64
-```
+VS Code should start.
 
 ## Install Metals
 
-1. Start VS Code
-2. Click the extensions icon in the left bar
-3. Search `metals`
-4. Click the `Scala (Metals)` extension and click the `install` button
-5. Wait for the pop-up and click reload
-6. You should see a new Metals icon in the left bar
+#### 1. Open VS Code:
+
+![Open VS Code](/img/installation/windows/vscode.png)
+
+#### 2. Click the extensions icon in the left bar:
+
+![Open Extensions](/img/installation/windows/vscode-extensions.png)
+
+#### 3. Search `metals`.
+#### 4. Click the `Scala (Metals)` extension and click the `Install` button:
+
+![Install Metals](/img/installation/windows/vscode-metals.png)
+
+#### 5. Wait until you see a new Metals icon in the left bar.
 
 ## Install Live Sharing
 
-1. In VS Code
-2. Click the extensions icon in the left bar
-3. Search `live share`
-4. Click the `Live Share` extension and click the `install` button
-5. Wait for the pop-up and click reload
-6. You should see the Live Share icon in the left bar
+#### 1. In VS Code, click the extensions icon in the left bar.
+#### 2. Search `live share`.
+#### 3. Click the `Live Share` extension and click the `Install` button:
+
+![Install Live Share](/img/installation/windows/vscode-live-share.png)
+
+#### 4. Wait until you see the Live Share icon in the left bar.
