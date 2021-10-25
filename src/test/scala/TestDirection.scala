@@ -2,8 +2,6 @@ import Direction.*
 
 class TestDirection extends munit.FunSuite:
 
-  val initWorld = World(snake(Right, 0 -> 0), Fruit(4, 0), 30, 30)
-
   inline def testOneMoveDirection(input: Option[UserInput])(before: Direction, after: Direction) =
     assertEquals(nextDirection(before, input), after)
 

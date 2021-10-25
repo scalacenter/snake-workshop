@@ -3,7 +3,7 @@ import javax.jws.soap.SOAPBinding.Use
 
 class TestFruit extends munit.FunSuite:
 
-  val initWorld = World(snake(Right, 0 -> 0), Fruit(4, 0), 30, 30)
+  val baseWorld = World(snake(Right, 0 -> 0), Fruit(4, 0), 30, 30)
 
   test("snake collides when head touches fruit") {
     testEatsFruit(fruit = 3 -> 4, snake(Left, 3 -> 4), didEat = true)
@@ -82,7 +82,7 @@ class TestFruit extends munit.FunSuite:
   }
 
   inline def testOneMoveEatFruit(before: Snake, after: Snake) =
-    val world1 = initWorld.copy(snake = before)
+    val world1 = baseWorld.copy(snake = before)
     val world2 = nextWorld(world1, None).asInstanceOf[World]
     assertEquals(world2.snake, after)
 

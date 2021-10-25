@@ -6,7 +6,7 @@ import Direction.*
 
 class TestMovement extends munit.FunSuite:
 
-  val initWorld = World(snake(Right, 0 -> 0), Fruit(4, 0), 30, 30)
+  val baseWorld = World(snake(Right, 0 -> 0), Fruit(4, 0), 30, 30)
   val snakeLength4 = snake(Down, 1 -> 1, 2 -> 1, 3 -> 1, 4 -> 1)
 
   test("move 1 square in current direction when empty input") {
@@ -117,7 +117,7 @@ class TestMovement extends munit.FunSuite:
     UserInput.Arrow(Direction.fromOrdinal(index))
 
   def sequenceMoves(snake: Snake, moves: List[UserInput]) =
-    val world0 = initWorld.copy(snake = snake, fruit = Fruit(-1, -1)) // non-existant fruit
+    val world0 = baseWorld.copy(snake = snake, fruit = Fruit(-1, -1)) // non-existant fruit
     val worlds = LazyList.unfold((world0, moves)) { (w, ms) =>
       ms match
         case m :: ms1 =>
@@ -137,6 +137,6 @@ class TestMovement extends munit.FunSuite:
     }
 
   inline def testOneMoveSnake(input: Option[UserInput])(before: Snake, after: Snake) =
-    val world1 = initWorld.copy(snake = before)
-    val world2 = initWorld.copy(snake = after)
+    val world1 = baseWorld.copy(snake = before)
+    val world2 = baseWorld.copy(snake = after)
     assertEquals(nextWorld(world1, input), world2)
