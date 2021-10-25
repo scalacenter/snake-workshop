@@ -1,6 +1,6 @@
 import org.scalajs.dom.CanvasRenderingContext2D
 
-/** Provides save management of the rendering context */
+/** Provides safe management of the rendering context */
 class ContextHolder(ctx: CanvasRenderingContext2D):
 
   def use(op: CanvasRenderingContext2D => Unit): Unit =

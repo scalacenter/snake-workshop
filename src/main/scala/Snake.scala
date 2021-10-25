@@ -1,6 +1,5 @@
 import scala.util.Random
 
-///// PROVIDED
 case class Fruit(x: Int, y: Int)
 
 object Fruit:
@@ -27,8 +26,6 @@ enum UserInput:
   case Reset // The reset key was pressed
 
 def score(world: World): Int = world.snake.body.length - 1
-
-//// WORKSHOP PARTICIPANTS WORK HERE:
 
 // student
 def bitItself(snake: Snake): Boolean =
