@@ -10,11 +10,11 @@ This page is reserved for **Linux** users. Instructions for other operating syst
 - [**Install - Windows**](../windows/git)
 :::
 
-1. Open the terminal
+#### 1. Open the terminal
 
 ![Open terminal](/img/installation/linux/terminal.png)
 
-2. Install Git
+#### 2. Install Git
 ```bash
 sudo apt install git
 ```
@@ -24,7 +24,12 @@ You need the super-privilege to install an application with `apt`.
 That's why you must type your password.
 :::
 
-3. Check that Git is installed
+#### 3. Check that Git is installed
 ```bash
 git --version
+```
+
+It should print:
+```
+git version 2.25.1
 ```
