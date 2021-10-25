@@ -12,6 +12,10 @@ object Fruit:
     )
 
 enum Direction:
+
+  case Up, Down, Left, Right
+
+  // student
   def opposite: Direction =
     this match
       case Up    => Down
@@ -19,26 +23,27 @@ enum Direction:
       case Left  => Right
       case Right => Left
 
+  // student
   def nextDirection(inputDirectionOpt: Option[Direction]): Direction =
     inputDirectionOpt
       .filter(input => input != opposite)
       .getOrElse(this)
 
-  case Up, Down, Left, Right
-
 case class Node(x: Int, y: Int)
 
 case class Snake(direction: Direction, head: Node, body: List[Node]):
+
   def move(inputDirection: Option[Direction], dimension: World.Dimension, isEating: Boolean): Snake =
-    val nextDir = direction.nextDirection(inputDirection)
-    val newHead = nextHead(nextDir, dimension)
+    val newDir = direction.nextDirection(inputDirection)
+    val newHead = nextHead(newDir, dimension)
     val newBody = nextBody(isEating)
-    Snake(nextDir, newHead, newBody)
+    Snake(newDir, newHead, newBody)
 
   // student
   def eatsFruit(fruit: Fruit): Boolean =
     fruit.position == head
 
+  // student
   def bitItself: Boolean =
     body.contains(head)
 
@@ -73,6 +78,7 @@ object World:
       else if x < 0 then width - 1
       else x
 
+    // student
     def wrapY(y: Int) =
       if y >= height then 0
       else if y < 0 then height - 1
