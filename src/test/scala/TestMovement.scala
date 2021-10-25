@@ -134,6 +134,8 @@ class TestMovement extends munit.FunSuite:
     worlds.zipWithIndex.foreach { (w, i) =>
       if !validSnake(w) then
         fail(s"snake at move $i is not valid [${w.snake}]")
+      if w.snake.body.length != snake.body.length then
+        fail(s"snake unexpectedly gained or lost body nodes at move $i [${w.snake}]")
     }
 
   inline def testOneMoveSnake(input: Option[UserInput])(before: Snake, after: Snake) =
