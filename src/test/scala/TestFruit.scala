@@ -1,9 +1,8 @@
 import Direction.*
-import javax.jws.soap.SOAPBinding.Use
 
 class TestFruit extends munit.FunSuite:
 
-  val baseWorld = World(snake(Right, 0 -> 0), Fruit(4, 0), 30, 30)
+  val baseWorld = World(snake(Right, 0 -> 0), Fruit(Node(4, 0)), World.Dimension(30, 30))
 
   test("snake collides when head touches fruit") {
     testEatsFruit(fruit = 3 -> 4, snake(Left, 3 -> 4), didEat = true)
@@ -87,4 +86,4 @@ class TestFruit extends munit.FunSuite:
     assertEquals(world2.snake, after)
 
   inline def testEatsFruit(fruit: (Int, Int), snake: Snake, didEat: Boolean) =
-    assertEquals(eatsFruit(snake, Fruit.fromProduct(fruit)), didEat)
+    assertEquals(snake.eatsFruit(Fruit.apply(Node.apply.tupled(fruit))), didEat)

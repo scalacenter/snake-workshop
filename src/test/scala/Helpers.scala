@@ -13,8 +13,8 @@ def validSnake(world: World) =
     val minY = math.min(n1.y, n2.y)
     val diffX = maxX - minX
     val diffY = maxY - minY
-    def validX = diffX == 1 || minX == 0 && maxX == world.width - 1
-    def validY = diffY == 1 || minY == 0 && maxY == world.height - 1
+    def validX = diffX == 1 || minX == 0 && maxX == world.dimension.width - 1
+    def validY = diffY == 1 || minY == 0 && maxY == world.dimension.height - 1
     validX ^ validY
   snake.body.sizeCompare(1) >= 0
   && snake.body.sliding(2).forall {

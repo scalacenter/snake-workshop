@@ -6,7 +6,7 @@ import Direction.*
 
 class TestMovement extends munit.FunSuite:
 
-  val baseWorld = World(snake(Right, 0 -> 0), Fruit(4, 0), 30, 30)
+  val baseWorld = World(snake(Right, 0 -> 0), Fruit(Node(4, 0)), World.Dimension(30, 30))
   val snakeLength4 = snake(Down, 1 -> 1, 2 -> 1, 3 -> 1, 4 -> 1)
 
   test("move 1 square in current direction when empty input") {
@@ -43,7 +43,7 @@ class TestMovement extends munit.FunSuite:
     )
     testOneMoveSnake(arrow(Down))(
       before = snake(Up, 0 -> 0),
-      after = snake(Down, 0 -> 1)
+      after = snake(Up, 0 -> 29)
     )
   }
 
@@ -54,7 +54,7 @@ class TestMovement extends munit.FunSuite:
     )
     testOneMoveSnake(arrow(Up))(
       before = snake(Down, 0 -> 0),
-      after = snake(Up, 0 -> 29)
+      after = snake(Down, 0 -> 1)
     )
     testOneMoveSnake(arrow(Up))(
       before = snake(Left, 0 -> 0),
@@ -69,7 +69,7 @@ class TestMovement extends munit.FunSuite:
   test("move 1 square left when left arrow") {
     testOneMoveSnake(arrow(Left))(
       before = snake(Right, 0 -> 0),
-      after = snake(Left, 29 -> 0)
+      after = snake(Right, 1 -> 0)
     )
     testOneMoveSnake(arrow(Left))(
       before = snake(Down, 0 -> 0),
@@ -96,7 +96,7 @@ class TestMovement extends munit.FunSuite:
     )
     testOneMoveSnake(arrow(Right))(
       before = snake(Left, 0 -> 0),
-      after = snake(Right, 1 -> 0)
+      after = snake(Left, 29 -> 0)
     )
     testOneMoveSnake(arrow(Right))(
       before = snake(Up, 0 -> 0),
@@ -117,7 +117,7 @@ class TestMovement extends munit.FunSuite:
     UserInput.Arrow(Direction.fromOrdinal(index))
 
   def sequenceMoves(snake: Snake, moves: List[UserInput]) =
-    val world0 = baseWorld.copy(snake = snake, fruit = Fruit(-1, -1)) // non-existant fruit
+    val world0 = baseWorld.copy(snake = snake, fruit = Fruit(Node(-1, -1))) // non-existant fruit
     val worlds = LazyList.unfold((world0, moves)) { (w, ms) =>
       ms match
         case m :: ms1 =>
@@ -132,8 +132,7 @@ class TestMovement extends munit.FunSuite:
   inline def validateMoves(snake: Snake, moves: List[UserInput]) =
     val worlds = sequenceMoves(snake, moves)
     worlds.zipWithIndex.foreach { (w, i) =>
-      if !validSnake(w) then
-        fail(s"snake at move $i is not valid [${w.snake}]")
+      if !validSnake(w) then fail(s"snake at move $i is not valid [${w.snake}]")
       if w.snake.body.length != snake.body.length then
         fail(s"snake unexpectedly gained or lost body nodes at move $i [${w.snake}]")
     }

@@ -1,25 +1,24 @@
 class TestWrap extends munit.FunSuite:
+  val dimension = World.Dimension(19, 23)
 
   test("wrap x to 0 at or after max width") {
     val width = 23
-    assert(wrap(22, 0, width) == 22) // below max, after min => No-op
-    assert(wrap(23, 0, width) == 0) // at max => go to min
-    assert(wrap(24, 0, width) == 0) // after max => to to min
+    assert(dimension.wrapX(22) == 22) // below max, after min => No-op
+    assert(dimension.wrapX(23) == 0) // at max => go to min
+    assert(dimension.wrapX(24) == 0) // after max => to to min
   }
 
   test("wrap x to max below min width") {
-    val width = 23
-    assert(wrap(-1, 0, width) == 22) // below min => to to border
+    assert(dimension.wrapX(-1) == 22) // below min => to to border
   }
 
   test("wrap y to 0 at or after max height") {
-    val height = 19
-    assert(wrap(18, 0, height) == 18) // below max, after min => No-op
-    assert(wrap(19, 0, height) == 0) // at max => go to min
-    assert(wrap(20, 0, height) == 0) // after max => to to min
+    assert(dimension.wrapY(18) == 18) // below max, after min => No-op
+    assert(dimension.wrapY(19) == 0) // at max => go to min
+    assert(dimension.wrapY(20) == 0) // after max => to to min
   }
 
   test("wrap y to max below min height") {
     val height = 19
-    assert(wrap(-1, 0, height) == 18) // below min => to to border
+    assert(dimension.wrapY(-1) == 18) // below min => to to border
   }
