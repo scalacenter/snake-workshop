@@ -17,13 +17,7 @@ jobs:
           node-version: '12.x'
       - name: Test Build
         run: |
-          if [ -e yarn.lock ]; then
-            yarn install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
-            npm ci
-          else
-            npm i
-          fi
+          yarn install --frozen-lockfile
           npm run build
         working-directory: website
   gh-release:
@@ -44,13 +38,7 @@ jobs:
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "gh-actions"
-          if [ -e yarn.lock ]; then
-            yarn install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
-            npm ci
-          else
-            npm i
-          fi
+          yarn install --frozen-lockfile
           npm run deploy
         working-directory: website
 
