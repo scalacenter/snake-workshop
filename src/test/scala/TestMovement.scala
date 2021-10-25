@@ -10,95 +10,95 @@ class TestMovement extends munit.FunSuite:
   val snakeLength4 = snake(Down, 1 -> 1, 2 -> 1, 3 -> 1, 4 -> 1)
 
   test("move 1 square in current direction when empty input") {
-    testOneMoveSnake(None)(
+    testOneMoveSnake(noAction)(
       before = snake(Right, 0 -> 0),
       after = snake(Right, 1 -> 0)
     )
-    testOneMoveSnake(None)(
+    testOneMoveSnake(noAction)(
       before = snake(Down, 0 -> 0),
       after = snake(Down, 0 -> 1)
     )
-    testOneMoveSnake(None)(
+    testOneMoveSnake(noAction)(
       before = snake(Left, 0 -> 0),
       after = snake(Left, 29 -> 0)
     )
-    testOneMoveSnake(None)(
+    testOneMoveSnake(noAction)(
       before = snake(Up, 0 -> 0),
       after = snake(Up, 0 -> 29)
     )
   }
 
   test("move 1 square down when down arrow") {
-    testOneMoveSnake(Some(UserInput.Arrow(Down)))(
+    testOneMoveSnake(arrow(Down))(
       before = snake(Right, 0 -> 0),
       after = snake(Down, 0 -> 1)
     )
-    testOneMoveSnake(Some(UserInput.Arrow(Down)))(
+    testOneMoveSnake(arrow(Down))(
       before = snake(Down, 0 -> 0),
       after = snake(Down, 0 -> 1)
     )
-    testOneMoveSnake(Some(UserInput.Arrow(Down)))(
+    testOneMoveSnake(arrow(Down))(
       before = snake(Left, 0 -> 0),
       after = snake(Down, 0 -> 1)
     )
-    testOneMoveSnake(Some(UserInput.Arrow(Down)))(
+    testOneMoveSnake(arrow(Down))(
       before = snake(Up, 0 -> 0),
       after = snake(Down, 0 -> 1)
     )
   }
 
   test("move 1 square up when up arrow") {
-    testOneMoveSnake(Some(UserInput.Arrow(Up)))(
+    testOneMoveSnake(arrow(Up))(
       before = snake(Right, 0 -> 0),
       after = snake(Up, 0 -> 29)
     )
-    testOneMoveSnake(Some(UserInput.Arrow(Up)))(
+    testOneMoveSnake(arrow(Up))(
       before = snake(Down, 0 -> 0),
       after = snake(Up, 0 -> 29)
     )
-    testOneMoveSnake(Some(UserInput.Arrow(Up)))(
+    testOneMoveSnake(arrow(Up))(
       before = snake(Left, 0 -> 0),
       after = snake(Up, 0 -> 29)
     )
-    testOneMoveSnake(Some(UserInput.Arrow(Up)))(
+    testOneMoveSnake(arrow(Up))(
       before = snake(Up, 0 -> 0),
       after = snake(Up, 0 -> 29)
     )
   }
 
   test("move 1 square left when left arrow") {
-    testOneMoveSnake(Some(UserInput.Arrow(Left)))(
+    testOneMoveSnake(arrow(Left))(
       before = snake(Right, 0 -> 0),
       after = snake(Left, 29 -> 0)
     )
-    testOneMoveSnake(Some(UserInput.Arrow(Left)))(
+    testOneMoveSnake(arrow(Left))(
       before = snake(Down, 0 -> 0),
       after = snake(Left, 29 -> 0)
     )
-    testOneMoveSnake(Some(UserInput.Arrow(Left)))(
+    testOneMoveSnake(arrow(Left))(
       before = snake(Left, 0 -> 0),
       after = snake(Left, 29 -> 0)
     )
-    testOneMoveSnake(Some(UserInput.Arrow(Left)))(
+    testOneMoveSnake(arrow(Left))(
       before = snake(Up, 0 -> 0),
       after = snake(Left, 29 -> 0)
     )
   }
 
   test("move 1 square right when right arrow") {
-    testOneMoveSnake(Some(UserInput.Arrow(Right)))(
+    testOneMoveSnake(arrow(Right))(
       before = snake(Right, 0 -> 0),
       after = snake(Right, 1 -> 0)
     )
-    testOneMoveSnake(Some(UserInput.Arrow(Right)))(
+    testOneMoveSnake(arrow(Right))(
       before = snake(Down, 0 -> 0),
       after = snake(Right, 1 -> 0)
     )
-    testOneMoveSnake(Some(UserInput.Arrow(Right)))(
+    testOneMoveSnake(arrow(Right))(
       before = snake(Left, 0 -> 0),
       after = snake(Right, 1 -> 0)
     )
-    testOneMoveSnake(Some(UserInput.Arrow(Right)))(
+    testOneMoveSnake(arrow(Right))(
       before = snake(Up, 0 -> 0),
       after = snake(Right, 1 -> 0)
     )
