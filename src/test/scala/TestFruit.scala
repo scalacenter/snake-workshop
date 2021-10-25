@@ -25,67 +25,65 @@ class TestFruit extends munit.FunSuite:
   }
 
   test("when snake length 1 eats fruit, grow one node") {
-    testOneMoveEatFruit(UserInput.Empty)(
+    testOneMoveEatFruit(
       before = snake(Right, 4 -> 0),
       after = snake(Right, 5 -> 0, 4 -> 0)
     )
-    testOneMoveEatFruit(UserInput.Empty)(
+    testOneMoveEatFruit(
       before = snake(Up, 4 -> 0),
       after = snake(Up, 4 -> 29, 4 -> 0)
     )
-    testOneMoveEatFruit(UserInput.Empty)(
+    testOneMoveEatFruit(
       before = snake(Down, 4 -> 0),
       after = snake(Down, 4 -> 1, 4 -> 0)
     )
-    testOneMoveEatFruit(UserInput.Empty)(
+    testOneMoveEatFruit(
       before = snake(Left, 4 -> 0),
       after = snake(Left, 3 -> 0, 4 -> 0)
     )
   }
 
   test("when snake length 2 eats fruit, grow one node") {
-    testOneMoveEatFruit(UserInput.Empty)(
+    testOneMoveEatFruit(
       before = snake(Right, 4 -> 0, 4 -> 1),
       after = snake(Right, 5 -> 0, 4 -> 0, 4 -> 1)
     )
-    testOneMoveEatFruit(UserInput.Empty)(
+    testOneMoveEatFruit(
       before = snake(Up, 4 -> 0, 4 -> 1),
       after = snake(Up, 4 -> 29, 4 -> 0, 4 -> 1)
     )
-    testOneMoveEatFruit(UserInput.Empty)(
+    testOneMoveEatFruit(
       before = snake(Down, 4 -> 0, 3 -> 0),
       after = snake(Down, 4 -> 1, 4 -> 0, 3 -> 0)
     )
-    testOneMoveEatFruit(UserInput.Empty)(
+    testOneMoveEatFruit(
       before = snake(Left, 4 -> 0, 4 -> 1),
       after = snake(Left, 3 -> 0, 4 -> 0, 4 -> 1)
     )
   }
 
   test("when snake length 3 eats fruit, grow one node") {
-    testOneMoveEatFruit(UserInput.Empty)(
+    testOneMoveEatFruit(
       before = snake(Right, 4 -> 0, 4 -> 1, 4 -> 2),
       after = snake(Right, 5 -> 0, 4 -> 0, 4 -> 1, 4 -> 2)
     )
-    testOneMoveEatFruit(UserInput.Empty)(
+    testOneMoveEatFruit(
       before = snake(Up, 4 -> 0, 4 -> 1, 4 -> 2),
       after = snake(Up, 4 -> 29, 4 -> 0, 4 -> 1, 4 -> 2)
     )
-    testOneMoveEatFruit(UserInput.Empty)(
+    testOneMoveEatFruit(
       before = snake(Down, 4 -> 0, 3 -> 0, 2 -> 0),
       after = snake(Down, 4 -> 1, 4 -> 0, 3 -> 0, 2 -> 0)
     )
-    testOneMoveEatFruit(UserInput.Empty)(
+    testOneMoveEatFruit(
       before = snake(Left, 4 -> 0, 4 -> 1, 4 -> 2),
       after = snake(Left, 3 -> 0, 4 -> 0, 4 -> 1, 4 -> 2)
     )
   }
 
-  inline def testOneMoveEatFruit(
-      input: UserInput
-  )(before: Snake, after: Snake) =
+  inline def testOneMoveEatFruit(before: Snake, after: Snake) =
     val world1 = initWorld.copy(snake = before)
-    val world2 = nextWorld(world1, input).asInstanceOf[World]
+    val world2 = nextWorld(world1, None).asInstanceOf[World]
     assertEquals(world2.snake, after)
 
   inline def testEatsFruit(fruit: (Int, Int), snake: Snake, didEat: Boolean) =

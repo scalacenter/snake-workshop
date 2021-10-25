@@ -25,7 +25,6 @@ enum UserInput:
   case Arrow(direction: Direction) // An arrow key was pressed
   case Pause // The pause key was pressed
   case Reset // The reset key was pressed
-  case Empty // No input was recieved this tick
 
 def score(world: World): Int = world.snake.body.length - 1
 
@@ -43,10 +42,10 @@ def wrap(x: Int, min: Int, max: Int) =
   else x
 
 // student
-def nextDirection(previous: Direction, input: UserInput): Direction =
+def nextDirection(previous: Direction, input: Option[UserInput]): Direction =
   input match
-    case UserInput.Arrow(next) => next
-    case _                     => previous
+    case Some(UserInput.Arrow(next)) => next
+    case _                           => previous
 
 // student
 def nextHead(head: Node, facing: Direction, height: Int, width: Int): Node =
@@ -66,7 +65,7 @@ def nextBody(snake: Snake, isEating: Boolean): List[Node] =
 def eatsFruit(snake: Snake, fruit: Fruit): Boolean =
   fruit.x == snake.head.x && fruit.y == snake.head.y
 
-def nextWorld(world: World, input: UserInput): World | GameOver.type =
+def nextWorld(world: World, input: Option[UserInput]): World | GameOver.type =
   val World(
     snake @ Snake(direction, head, _),
     fruit,
@@ -75,8 +74,8 @@ def nextWorld(world: World, input: UserInput): World | GameOver.type =
   ) = world
 
   input match
-    case UserInput.Pause       => world
-    case UserInput.Reset       => GameOver
+    case Some(UserInput.Pause) => world
+    case Some(UserInput.Reset) => GameOver
     case _ if bitItself(snake) => GameOver
     case _ =>
       val isEating = eatsFruit(snake, fruit)

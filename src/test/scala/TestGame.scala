@@ -10,6 +10,6 @@ class TestGame extends munit.FunSuite:
   test("snake bit itself implies game over") {
     val w1 = initWorld.copy(snake = ouroboros)
     val w2 = initWorld.copy(snake = safe)
-    assertEquals(nextWorld(w1, UserInput.Empty), GameOver)
-    assertNotEquals(nextWorld(w2, UserInput.Empty), GameOver: (World | GameOver.type))
+    assertEquals(nextWorld(w1, None), GameOver)
+    assertNotEquals(nextWorld(w2, None), GameOver: (World | GameOver.type))
   }

@@ -10,95 +10,95 @@ class TestMovement extends munit.FunSuite:
   val snakeLength4 = snake(Down, 1 -> 1, 2 -> 1, 3 -> 1, 4 -> 1)
 
   test("move 1 square in current direction when empty input") {
-    testOneMoveSnake(UserInput.Empty)(
+    testOneMoveSnake(None)(
       before = snake(Right, 0 -> 0),
       after = snake(Right, 1 -> 0)
     )
-    testOneMoveSnake(UserInput.Empty)(
+    testOneMoveSnake(None)(
       before = snake(Down, 0 -> 0),
       after = snake(Down, 0 -> 1)
     )
-    testOneMoveSnake(UserInput.Empty)(
+    testOneMoveSnake(None)(
       before = snake(Left, 0 -> 0),
       after = snake(Left, 29 -> 0)
     )
-    testOneMoveSnake(UserInput.Empty)(
+    testOneMoveSnake(None)(
       before = snake(Up, 0 -> 0),
       after = snake(Up, 0 -> 29)
     )
   }
 
   test("move 1 square down when down arrow") {
-    testOneMoveSnake(UserInput.Arrow(Down))(
+    testOneMoveSnake(Some(UserInput.Arrow(Down)))(
       before = snake(Right, 0 -> 0),
       after = snake(Down, 0 -> 1)
     )
-    testOneMoveSnake(UserInput.Arrow(Down))(
+    testOneMoveSnake(Some(UserInput.Arrow(Down)))(
       before = snake(Down, 0 -> 0),
       after = snake(Down, 0 -> 1)
     )
-    testOneMoveSnake(UserInput.Arrow(Down))(
+    testOneMoveSnake(Some(UserInput.Arrow(Down)))(
       before = snake(Left, 0 -> 0),
       after = snake(Down, 0 -> 1)
     )
-    testOneMoveSnake(UserInput.Arrow(Down))(
+    testOneMoveSnake(Some(UserInput.Arrow(Down)))(
       before = snake(Up, 0 -> 0),
       after = snake(Down, 0 -> 1)
     )
   }
 
   test("move 1 square up when up arrow") {
-    testOneMoveSnake(UserInput.Arrow(Up))(
+    testOneMoveSnake(Some(UserInput.Arrow(Up)))(
       before = snake(Right, 0 -> 0),
       after = snake(Up, 0 -> 29)
     )
-    testOneMoveSnake(UserInput.Arrow(Up))(
+    testOneMoveSnake(Some(UserInput.Arrow(Up)))(
       before = snake(Down, 0 -> 0),
       after = snake(Up, 0 -> 29)
     )
-    testOneMoveSnake(UserInput.Arrow(Up))(
+    testOneMoveSnake(Some(UserInput.Arrow(Up)))(
       before = snake(Left, 0 -> 0),
       after = snake(Up, 0 -> 29)
     )
-    testOneMoveSnake(UserInput.Arrow(Up))(
+    testOneMoveSnake(Some(UserInput.Arrow(Up)))(
       before = snake(Up, 0 -> 0),
       after = snake(Up, 0 -> 29)
     )
   }
 
   test("move 1 square left when left arrow") {
-    testOneMoveSnake(UserInput.Arrow(Left))(
+    testOneMoveSnake(Some(UserInput.Arrow(Left)))(
       before = snake(Right, 0 -> 0),
       after = snake(Left, 29 -> 0)
     )
-    testOneMoveSnake(UserInput.Arrow(Left))(
+    testOneMoveSnake(Some(UserInput.Arrow(Left)))(
       before = snake(Down, 0 -> 0),
       after = snake(Left, 29 -> 0)
     )
-    testOneMoveSnake(UserInput.Arrow(Left))(
+    testOneMoveSnake(Some(UserInput.Arrow(Left)))(
       before = snake(Left, 0 -> 0),
       after = snake(Left, 29 -> 0)
     )
-    testOneMoveSnake(UserInput.Arrow(Left))(
+    testOneMoveSnake(Some(UserInput.Arrow(Left)))(
       before = snake(Up, 0 -> 0),
       after = snake(Left, 29 -> 0)
     )
   }
 
   test("move 1 square right when right arrow") {
-    testOneMoveSnake(UserInput.Arrow(Right))(
+    testOneMoveSnake(Some(UserInput.Arrow(Right)))(
       before = snake(Right, 0 -> 0),
       after = snake(Right, 1 -> 0)
     )
-    testOneMoveSnake(UserInput.Arrow(Right))(
+    testOneMoveSnake(Some(UserInput.Arrow(Right)))(
       before = snake(Down, 0 -> 0),
       after = snake(Right, 1 -> 0)
     )
-    testOneMoveSnake(UserInput.Arrow(Right))(
+    testOneMoveSnake(Some(UserInput.Arrow(Right)))(
       before = snake(Left, 0 -> 0),
       after = snake(Right, 1 -> 0)
     )
-    testOneMoveSnake(UserInput.Arrow(Right))(
+    testOneMoveSnake(Some(UserInput.Arrow(Right)))(
       before = snake(Up, 0 -> 0),
       after = snake(Right, 1 -> 0)
     )
@@ -121,7 +121,7 @@ class TestMovement extends munit.FunSuite:
     val worlds = LazyList.unfold((world0, moves)) { (w, ms) =>
       ms match
         case m :: ms1 =>
-          nextWorld(w, m) match
+          nextWorld(w, Some(m)) match
             case GameOver => None // there was a snake-eat-self
             case w1: World =>
               Some((w1, (w1, ms1)))
@@ -136,7 +136,7 @@ class TestMovement extends munit.FunSuite:
         fail(s"snake at move $i is not valid [${w.snake}]")
     }
 
-  inline def testOneMoveSnake(input: UserInput)(before: Snake, after: Snake) =
+  inline def testOneMoveSnake(input: Option[UserInput])(before: Snake, after: Snake) =
     val world1 = initWorld.copy(snake = before)
     val world2 = initWorld.copy(snake = after)
     assertEquals(nextWorld(world1, input), world2)

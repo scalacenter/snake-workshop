@@ -10,24 +10,24 @@ def initWorld = World(
 )
 
 // Converts keyboard input to UserInput
-def inputFromKey(key: String, current: UserInput) =
+def inputFromKey(key: String, current: Option[UserInput]): Option[UserInput] =
   key match
-    case "ArrowUp"    => UserInput.Arrow(Direction.Up)
-    case "ArrowDown"  => UserInput.Arrow(Direction.Down)
-    case "ArrowLeft"  => UserInput.Arrow(Direction.Left)
-    case "ArrowRight" => UserInput.Arrow(Direction.Right)
-    case "p"          => UserInput.Pause
-    case "r"          => UserInput.Reset
+    case "ArrowUp"    => Some(UserInput.Arrow(Direction.Up))
+    case "ArrowDown"  => Some(UserInput.Arrow(Direction.Down))
+    case "ArrowLeft"  => Some(UserInput.Arrow(Direction.Left))
+    case "ArrowRight" => Some(UserInput.Arrow(Direction.Right))
+    case "p"          => Some(UserInput.Pause)
+    case "r"          => Some(UserInput.Reset)
     case _            => current
 
-def nextGame(world: World, input: UserInput) =
+def nextGame(world: World, input: Option[UserInput]) =
   nextWorld(world, input) match
     case GameOver     => initWorld
     case world: World => world
 
-def nextInput(input: UserInput) =
-  if input == UserInput.Pause then input
-  else UserInput.Empty
+def nextInput(input: Option[UserInput]) =
+  if input == Some(UserInput.Pause) then input
+  else None
 
 def gameLoop(holder: ContextHolder) =
   // painter handles rendering to the canvas
@@ -35,7 +35,7 @@ def gameLoop(holder: ContextHolder) =
 
   // mutable game state
   var world = initWorld
-  var userInput = UserInput.Empty
+  var userInput = Option.empty[UserInput]
 
   // updates the game state, representing 1 tick of game-time
   def tick() =
