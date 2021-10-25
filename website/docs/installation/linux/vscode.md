@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # VS Code
@@ -16,16 +16,16 @@ In this page we will install VS Code and two extensions:
 
 ## Install VS Code
 
-1. Go to https://code.visualstudio.com/Download
-2. Download the `.deb` package.
+#### 1. Go to https://code.visualstudio.com/Download
+#### 2. Download the `.deb` package.
 
 ![Download VS Code](/img/installation/linux/download-vscode.png)
 
-3. Open the terminal
+#### 3. Open the terminal
 
 ![Open terminal](/img/installation/linux/terminal.png)
 
-4. Install the downloaded package
+#### 4. Install the downloaded package
 
 ```bash
 sudo apt install <.deb file>
@@ -38,7 +38,7 @@ Typically it would be:
 sudo apt install ~/Downloads/code_1.61.2-1634656828_amd64.deb
 ```
 
-5. Check that Visual Studio Code is succefully installed
+#### 5. Check that Visual Studio Code is succefully installed
 
 ```bash
 code -v
@@ -53,27 +53,27 @@ x64
 
 ## Install Metals
 
-1. Open VS Code
+#### 1. Open VS Code
 
 ![Open VS Code](/img/installation/linux/vscode.png)
 
-2. Click the extensions icon in the left bar
+#### 2. Click the extensions icon in the left bar
 
 ![Open Extensions](/img/installation/linux/vscode-extensions.png)
 
-3. Search `metals`
-4. Click the `Scala (Metals)` extension and click the `Install` button
+#### 3. Search `metals`
+#### 4. Click the `Scala (Metals)` extension and click the `Install` button
 
 ![Install Metals](/img/installation/linux/vscode-metals.png)
 
-5. Wait until you see a new Metals icon in the left bar
+#### 5. Wait until you see a new Metals icon in the left bar
 
 ## Install Live Sharing
 
-1. In VS Code, click the extensions icon in the left bar
-2. Search `live share`
-3. Click the `Live Share` extension and click the `Install` button
+#### 1. In VS Code, click the extensions icon in the left bar
+#### 2. Search `live share`
+#### 3. Click the `Live Share` extension and click the `Install` button
 
 ![Install Live Share](/img/installation/linux/vscode-live-share.png)
 
-4. Wait until you see the Live Share icon in the left bar
+#### 4. Wait until you see the Live Share icon in the left bar

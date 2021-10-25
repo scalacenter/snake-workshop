@@ -21,6 +21,13 @@ Scala is a cross-platform language:
  - you can run a Scala program on any personal computer or server using the Java Virtual Machine (JVM)
  - you can run it on a web-browser using the Javascript technology
 
+:::info
+The JVM is the primary platform of Scala.
+By default, the Scala compiler compiles to Java bytecode.
+
+To compile Scala to JavaScript we use **Scala.js**, an extension of the Scala compiler.
+:::
+
 This makes Scala the perfect general purpose programming language.
 
 Writing programs by hand is not an easy task, but Scala has a rich ecosystem of tools to empower you write Scala programs.
@@ -83,3 +90,14 @@ You can also clone someone else's repository, to have it locally, test it, modif
 
 Github (https://github.com/) is a free and popular hosting service for git repositories.
 That's where you should go to find some cool projects, run them locally and even contribute to them.
+
+## Node.js
+
+Scala can compile to JavaScript, which is the language that executes in web pages, in your browser.
+That's what we will use in the workshop to run the Snake game. We will write Scala code, compile it to JavaScript and execute it in a browser.
+
+Node.js is JavaScript engine. As the browser, Node.js can execute JavaScript code.
+We will use it to run the tests of the Snake game.
+
+Also, Node.js comes with npm a package manager to download and install JavaScript libraries.
+npm is the JavaScript equivalent of Coursier
