@@ -71,7 +71,7 @@ If you have a fruit, you can read its `x` and `y` attributes using `fruit.x` and
 
 ### Snake
 
-A snake is made up of blocks, or nodes. Each node has an `x` and `y` coordinate.
+A snake is made up of blocks, or nodes. Each node has an `x` and `y` coordinates.
 All of the nodes of a snake are collected into a list.
 The snake also contains the direction in which it is moving.
 
