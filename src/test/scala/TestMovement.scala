@@ -6,7 +6,7 @@ import Direction.*
 
 class TestMovement extends munit.FunSuite:
 
-  val baseWorld = World(snake(Right, 0 -> 0), Fruit(Node(4, 0)), Size(30, 30))
+  val baseWorld = World(snake(Right, 0 -> 0), Fruit(Block(4, 0)), Size(30, 30))
   val snakeLength4 = snake(Down, 1 -> 1, 2 -> 1, 3 -> 1, 4 -> 1)
 
   test("can't reverse snake onto itself") {
@@ -120,11 +120,11 @@ class TestMovement extends munit.FunSuite:
     UserInput.Arrow(Direction.fromOrdinal(index))
 
   def sequenceMoves(snake: Snake, moves: List[UserInput]) =
-    val world0 = baseWorld.copy(snake = snake, fruit = Fruit(Node(-1, -1))) // non-existant fruit
+    val world0 = baseWorld.copy(snake = snake, fruit = Fruit(Block(-1, -1))) // non-existant fruit
     val worlds = LazyList.unfold((world0, moves)) { (w, ms) =>
       ms match
         case m :: ms1 =>
-          nextFromInput(w, Some(m)) match
+          updateGame(w, Some(m)) match
             case GameOver => None // there was a snake-eat-self
             case w1: World =>
               Some((w1, (w1, ms1)))
@@ -143,4 +143,4 @@ class TestMovement extends munit.FunSuite:
   inline def testOneMoveSnake(input: Option[UserInput])(before: Snake, after: Snake) =
     val world1 = baseWorld.copy(snake = before)
     val world2 = baseWorld.copy(snake = after)
-    assertEquals(nextFromInput(world1, input), world2)
+    assertEquals(updateGame(world1, input), world2)

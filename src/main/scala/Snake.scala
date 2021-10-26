@@ -1,16 +1,15 @@
 import scala.util.Random
 
-/** Represents an occupied space in the world */
-case class Node(x: Int, y: Int)
+case class Block(x: Int, y: Int)
 
-case class Fruit(position: Node)
+case class Fruit(block: Block)
 
 enum Direction:
   case Up, Down, Left, Right
 
 case class World(snake: Snake, fruit: Fruit, size: Size)
 
-case class Size(height: Int, width: Int)
+case class Size(width: Int, height: Int)
 
 case object GameOver
 
@@ -19,76 +18,92 @@ enum UserInput:
   case Pause // The pause key was pressed
   case Reset // The reset key was pressed
 
-case class Snake(direction: Direction, body: List[Node])
+case class Snake(direction: Direction, body: List[Block])
 
-def nextFromInput(world: World, input: Option[UserInput]): World | GameOver.type =
+def updateGame(world: World, input: Option[UserInput]): World | GameOver.type =
   input match
     case anyInput if bitItself(world.snake) => GameOver
     case Some(UserInput.Reset)              => GameOver
-    case Some(UserInput.Pause)              => world
-    case Some(UserInput.Arrow(direction))   => nextWorld(world, Some(direction))
-    case None                               => nextWorld(world, None)
+    case Some(UserInput.Pause)              => world // student
+    case Some(UserInput.Arrow(direction))   => nextWorld(world, Some(direction)) // student
+    case None                               => nextWorld(world, None) // student
 
 def nextWorld(world: World, inputDirection: Option[Direction]): World =
-  val isEating = eatsFruit(world.snake, world.fruit)
-  val newSnake = nextSnake(world.snake, inputDirection, isEating, world.size)
-  val newFruit = if isEating then createRandomFruit(world.size) else world.fruit
-  world.copy(snake = newSnake, fruit = newFruit)
+  val isEating: Boolean = ???//eatsFruit(world.snake, world.fruit)
+  val newSnake: Snake = ???//nextSnake(world.snake, inputDirection, isEating, world.size)
+  val newFruit: Fruit = ???//if isEating then createRandomFruit(world.size) else world.fruit
+  World(newSnake, newFruit, world.size)
 
-def nextSnake(snake: Snake, inputDirection: Option[Direction], isEating: Boolean, size: Size): Snake =
+def nextSnake(snake: Snake, inputDirection: Option[Direction], isEating: Boolean, worldSize: Size): Snake =
   val newDir = nextDirection(snake.direction, inputDirection)
-  val newHead = nextHead(snake, newDir, size)
+  val newHead = nextHead(snake, newDir, worldSize)
   val newBody = nextBody(snake, isEating)
   Snake(newDir, newHead :: newBody)
 
-def createRandomFruit(size: Size): Fruit =
-  val x = Random.nextInt(size.width)
-  val y = Random.nextInt(size.height)
-  Fruit(Node(x, y))
+def createRandomFruit(worldSize: Size): Fruit =
+  val x = Random.nextInt(worldSize.width)
+  val y = Random.nextInt(worldSize.height)
+  Fruit(Block(x, y))
 
-// student
+/** Tests if the snakes head has collided with the rest of its body.
+  *
+  * If the snake's tail contains the snake's head, then the snake has bit itself.
+  *
+  * hint: Use the `head` and `tail` methods on `body` fielf of snake to get the head
+  * and tail of the snake.
+  */
 def bitItself(snake: Snake): Boolean =
   snake.body.tail.contains(snake.body.head)
 
-// student
+/** Tests if the snake is eating the fruit.
+  *
+  * If the fruit and snake's head have an equal position, then the snake eats the fruit.
+  *
+  * hint: Use the `head` method on the `body` field of snake to get the head of the snake. The positition of the snake's
+  * head is the head of the snake. The position of the fruit is accessed from the `position` field.
+  * We can test that two nodes are equal using `==`.
+  */
 def eatsFruit(snake: Snake, fruit: Fruit): Boolean =
-  fruit.position == snake.body.head
+  fruit.block == snake.body.head
 
 // student
-def nextHead(snake: Snake, nextDirection: Direction, size: Size): Node =
+def nextHead(snake: Snake, nextDirection: Direction, worldSize: Size): Block =
   val head = snake.body.head
   nextDirection match
-    case Direction.Up    => head.copy(y = wrapY(size, head.y - 1))
-    case Direction.Down  => head.copy(y = wrapY(size, head.y + 1))
-    case Direction.Left  => head.copy(x = wrapX(size, head.x - 1))
-    case Direction.Right => head.copy(x = wrapX(size, head.x + 1))
+    case Direction.Up    => Block(x = head.x, y = wrapY(worldSize, head.y - 1))
+    case Direction.Down  => Block(x = head.x, y = wrapY(worldSize, head.y + 1))
+    case Direction.Left  => Block(x = wrapX(worldSize, head.x - 1), y = head.y)
+    case Direction.Right => Block(x = wrapX(worldSize, head.x + 1), y = head.y)
 
 // student (consider cheatsheet for list methods)
-def nextBody(snake: Snake, isEating: Boolean): List[Node] =
+def nextBody(snake: Snake, isEating: Boolean): List[Block] =
   if isEating then snake.body
   else snake.body.dropRight(1)
 
 // student
-def wrapX(size: Size, x: Int) =
-  if x >= size.width then 0
-  else if x < 0 then size.width - 1
+def wrapX(worldSize: Size, x: Int) =
+  if x >= worldSize.width then 0
+  else if x < 0 then worldSize.width - 1
   else x
 
 // student
-def wrapY(size: Size, y: Int) =
-  if y >= size.height then 0
-  else if y < 0 then size.height - 1
+def wrapY(worldSize: Size, y: Int) =
+  if y >= worldSize.height then 0
+  else if y < 0 then worldSize.height - 1
   else y
 
 // student
-def nextDirection(current: Direction, inputDirection: Option[Direction]): Direction =
-  inputDirection
-    .filter(input => input != opposite(current))
-    .getOrElse(current)
+def nextDirection(currentDirection: Direction, inputDirection: Option[Direction]): Direction =
+  inputDirection match
+    case Some(newDirection) =>
+      if newDirection == opposite(currentDirection) then currentDirection
+      else newDirection
+    case None =>
+      currentDirection
 
 // student
-def opposite(to: Direction): Direction =
-  to match
+def opposite(direction: Direction): Direction =
+  direction match
     case Direction.Up    => Direction.Down
     case Direction.Down  => Direction.Up
     case Direction.Left  => Direction.Right

@@ -7,7 +7,7 @@ class Painter(scale: Int):
     paintSnake(snake, holder)
 
   private def paintFruit(fruit: Fruit, holder: ContextHolder): Unit =
-    val Fruit(Node(x, y)) = fruit
+    val Fruit(Block(x, y)) = fruit
     holder.use { ctx =>
       ctx.fillStyle = "#4cafab"
       ctx.fillRect(x * scale, y * scale, scale, scale)
@@ -16,5 +16,5 @@ class Painter(scale: Int):
   private def paintSnake(snake: Snake, holder: ContextHolder): Unit =
     holder.use { ctx =>
       ctx.fillStyle = "#FFFFFF"
-      for Node(x, y) <- snake.body do ctx.fillRect(x * scale, y * scale, scale, scale)
+      for Block(x, y) <- snake.body do ctx.fillRect(x * scale, y * scale, scale, scale)
     }

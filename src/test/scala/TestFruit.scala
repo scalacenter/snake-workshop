@@ -2,7 +2,7 @@ import Direction.*
 
 class TestFruit extends munit.FunSuite:
 
-  val baseWorld = World(snake(Right, 0 -> 0), Fruit(Node(4, 0)), Size(30, 30))
+  val baseWorld = World(snake(Right, 0 -> 0), Fruit(Block(4, 0)), Size(30, 30))
 
   test("snake collides when head touches fruit") {
     testEatsFruit(fruit = 3 -> 4, snake(Left, 3 -> 4), didEat = true)
@@ -82,8 +82,8 @@ class TestFruit extends munit.FunSuite:
 
   inline def testOneMoveEatFruit(before: Snake, after: Snake) =
     val world1 = baseWorld.copy(snake = before)
-    val world2 = nextFromInput(world1, None).asInstanceOf[World]
+    val world2 = updateGame(world1, None).asInstanceOf[World]
     assertEquals(world2.snake, after)
 
   inline def testEatsFruit(fruit: (Int, Int), snake: Snake, didEat: Boolean) =
-    assertEquals(eatsFruit(snake, Fruit.apply(Node.apply.tupled(fruit))), didEat)
+    assertEquals(eatsFruit(snake, Fruit.apply(Block.apply.tupled(fruit))), didEat)

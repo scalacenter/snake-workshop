@@ -3,8 +3,8 @@ import org.scalajs.dom.{KeyboardEvent, CanvasRenderingContext2D}
 
 // the primary world state
 def initWorld = World(
-  snake = Snake(Direction.Right, Node(0, 0) :: Nil),
-  fruit = Fruit(Node(4, 0)),
+  snake = Snake(Direction.Right, Block(0, 0) :: Nil),
+  fruit = Fruit(Block(4, 0)),
   size = Size(width = 30, height = 30)
 )
 
@@ -20,7 +20,7 @@ def inputFromKey(key: String, current: Option[UserInput]): Option[UserInput] =
     case _            => current
 
 def nextGame(world: World, input: Option[UserInput]) =
-  nextFromInput(world, input) match
+  updateGame(world, input) match
     case GameOver     => initWorld
     case world: World => world
 
