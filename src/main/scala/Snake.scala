@@ -20,40 +20,9 @@ enum UserInput:
 
 case class Snake(direction: Direction, body: List[Block])
 
-def updateGame(world: World, input: Option[UserInput]): World | GameOver.type =
-  input match
-    case anyInput if bitItself(world.snake) => GameOver
-    case Some(UserInput.Reset)              => GameOver
-    case Some(UserInput.Pause)              => world // student
-    case Some(UserInput.Arrow(direction))   => nextWorld(world, Some(direction)) // student
-    case None                               => nextWorld(world, None) // student
+def score(world: World): Int = world.snake.body.length - 1
 
-def nextWorld(world: World, inputDirection: Option[Direction]): World =
-  val isEating: Boolean = ???//eatsFruit(world.snake, world.fruit)
-  val newSnake: Snake = ???//nextSnake(world.snake, inputDirection, isEating, world.size)
-  val newFruit: Fruit = ???//if isEating then createRandomFruit(world.size) else world.fruit
-  World(newSnake, newFruit, world.size)
-
-def nextSnake(snake: Snake, inputDirection: Option[Direction], isEating: Boolean, worldSize: Size): Snake =
-  val newDir = nextDirection(snake.direction, inputDirection)
-  val newHead = nextHead(snake, newDir, worldSize)
-  val newBody = nextBody(snake, isEating)
-  Snake(newDir, newHead :: newBody)
-
-def createRandomFruit(worldSize: Size): Fruit =
-  val x = Random.nextInt(worldSize.width)
-  val y = Random.nextInt(worldSize.height)
-  Fruit(Block(x, y))
-
-/** Tests if the snakes head has collided with the rest of its body.
-  *
-  * If the snake's tail contains the snake's head, then the snake has bit itself.
-  *
-  * hint: Use the `head` and `tail` methods on `body` fielf of snake to get the head
-  * and tail of the snake.
-  */
-def bitItself(snake: Snake): Boolean =
-  snake.body.tail.contains(snake.body.head)
+// ********
 
 /** Tests if the snake is eating the fruit.
   *
@@ -66,31 +35,20 @@ def bitItself(snake: Snake): Boolean =
 def eatsFruit(snake: Snake, fruit: Fruit): Boolean =
   fruit.block == snake.body.head
 
-// student
-def nextHead(snake: Snake, nextDirection: Direction, worldSize: Size): Block =
-  val head = snake.body.head
-  nextDirection match
-    case Direction.Up    => Block(x = head.x, y = wrapY(worldSize, head.y - 1))
-    case Direction.Down  => Block(x = head.x, y = wrapY(worldSize, head.y + 1))
-    case Direction.Left  => Block(x = wrapX(worldSize, head.x - 1), y = head.y)
-    case Direction.Right => Block(x = wrapX(worldSize, head.x + 1), y = head.y)
-
 // student (consider cheatsheet for list methods)
 def nextBody(snake: Snake, isEating: Boolean): List[Block] =
   if isEating then snake.body
   else snake.body.dropRight(1)
 
-// student
-def wrapX(worldSize: Size, x: Int) =
-  if x >= worldSize.width then 0
-  else if x < 0 then worldSize.width - 1
-  else x
+// ********
 
 // student
-def wrapY(worldSize: Size, y: Int) =
-  if y >= worldSize.height then 0
-  else if y < 0 then worldSize.height - 1
-  else y
+def opposite(direction: Direction): Direction =
+  direction match
+    case Direction.Up    => Direction.Down
+    case Direction.Down  => Direction.Up
+    case Direction.Left  => Direction.Right
+    case Direction.Right => Direction.Left
 
 // student
 def nextDirection(currentDirection: Direction, inputDirection: Option[Direction]): Direction =
@@ -101,15 +59,69 @@ def nextDirection(currentDirection: Direction, inputDirection: Option[Direction]
     case None =>
       currentDirection
 
-// student
-def opposite(direction: Direction): Direction =
-  direction match
-    case Direction.Up    => Direction.Down
-    case Direction.Down  => Direction.Up
-    case Direction.Left  => Direction.Right
-    case Direction.Right => Direction.Left
+// ********
 
-def score(world: World): Int = world.snake.body.length - 1
+def wrapX(worldSize: Size, x: Int) =
+  if x >= worldSize.width then 0
+  else if x < 0 then worldSize.width - 1
+  else x
+
+def wrapY(worldSize: Size, y: Int) =
+  if y >= worldSize.height then 0
+  else if y < 0 then worldSize.height - 1
+  else y
+
+// student
+def nextHead(snake: Snake, nextDirection: Direction, worldSize: Size): Block =
+  val head = snake.body.head
+  nextDirection match
+    case Direction.Up    => Block(x = head.x, y = wrapY(worldSize, head.y - 1))
+    case Direction.Down  => Block(x = head.x, y = wrapY(worldSize, head.y + 1))
+    case Direction.Left  => Block(x = wrapX(worldSize, head.x - 1), y = head.y)
+    case Direction.Right => Block(x = wrapX(worldSize, head.x + 1), y = head.y)
+
+// ********
+
+def nextSnake(snake: Snake, inputDirection: Option[Direction], isEating: Boolean, worldSize: Size): Snake =
+  val newDir = nextDirection(snake.direction, inputDirection)
+  val newHead = nextHead(snake, newDir, worldSize)
+  val newBody = nextBody(snake, isEating)
+  Snake(newDir, newHead :: newBody)
+
+// ********
+
+def createRandomFruit(worldSize: Size): Fruit =
+  val x = Random.nextInt(worldSize.width)
+  val y = Random.nextInt(worldSize.height)
+  Fruit(Block(x, y))
+
+def nextWorld(world: World, inputDirection: Option[Direction]): World =
+  val isEating: Boolean = eatsFruit(world.snake, world.fruit)
+  val newSnake: Snake = nextSnake(world.snake, inputDirection, isEating, world.size)
+  val newFruit: Fruit = if isEating then createRandomFruit(world.size) else world.fruit
+  World(newSnake, newFruit, world.size)
+
+// ********
+
+/** Tests if the snakes head has collided with the rest of its body.
+  *
+  * If the snake's tail contains the snake's head, then the snake has bit itself.
+  *
+  * hint: Use the `head` and `tail` methods on `body` fielf of snake to get the head
+  * and tail of the snake.
+  */
+def bitItself(snake: Snake): Boolean =
+  snake.body.tail.contains(snake.body.head)
+
+def updateGame(world: World, input: Option[UserInput]): World | GameOver.type =
+  input match
+    case anyInput if bitItself(world.snake) => GameOver
+    case Some(UserInput.Reset)              => GameOver
+    case Some(UserInput.Pause)              => world // student
+    case Some(UserInput.Arrow(direction))   => nextWorld(world, Some(direction)) // student
+    case None                               => nextWorld(world, None) // student
+
+// ********
 
 /*
  * end of workshop. BUT time for expansion. Possible ideas:
