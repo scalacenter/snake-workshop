@@ -2,68 +2,92 @@
 sidebar_position: 1
 ---
 
-# Setup Scala  - TODO
+# Setup Scala
 
 :::caution
-
-This section is reserved for Linux users. Instructions for other operating system can be found in:
-- [Install - Mac](../mac/scala-setup)
-- [Install - Windows](../windows/scala-setup)
+This page is reserved for **Windows** users. Instructions for other operating system can be found in:
+- [**Install - Linux**](../linux/scala-setup)
+- [**Install - Mac**](../mac/scala-setup)
 :::
 
 ## Install Scala using Coursier
 
 Coursier is the Scala artifact fetcher, we will use it to download the indispensable Scala toolbox.
 
-1. Open a terminal.
-2. In the terminal, download couriser by copy-pasting and executing:
+#### 1. Download Visual C++ Redistribuable from [Microsoft website](https://www.microsoft.com/en-us/download/details.aspx?id=48145).
 
-```bash
-curl -fLo cs https://git.io/coursier-cli-"$(uname | tr LD ld)"
+![Download vc_redist.x64.exe](/img/installation/windows/redist.png)
+
+#### 2. Execute the downloaded `VC_redist.x64.exe` and follow the installation steps.
+
+#### 3. Open the Command Prompt.
+
+![Open Command Prompt](/img/installation/windows/cmd.png)
+
+:::tip
+To execute an action in the Command Prompt you must type a command then hit `Enter` on the keyboard.
+For example, you can type the `dir` command to print information about the current directory:
+
+Try it yourself: copy paste the command below into the terminal and hit `Enter`.
+```batch
+dir
+```
+:::
+
+#### 4. In the Command Prompt, download the `cs.exe` file:
+
+```batch
+bitsadmin /transfer cs-cli https://git.io/coursier-cli-windows-exe "%cd%\cs.exe"
 ```
 
-3. Make the downloaded file executable with:
+#### 5. Execute the `cs.exe` file to setup scala:
 
-```bash
-chmod +x cs
+```batch
+.\cs setup --yes
 ```
 
-4. Execute the coursier file to setup scala:
+#### 6. Close and reopen the Command Prompt to refresh the environment variables.
 
-```bash
-./cs setup
-```
+#### 7. Finally, you can remove the coursier file:
 
-5. If prompted to install Java, hit `Enter` to validate
-6. If prompted to uptade your `.profile` file, hit `Enter` to validate 
-7. Reload your `.profile` file:
-
-```bash
-. ~/.profile
-```
-
-8. Finally, you can remove the coursier file:
-
-```bash
-rm cs
+```batch
+del cs.exe
 ```
 
 ## Check the installation of Scala
 
-1. Check that Coursier is installed
+#### 1. Check that Coursier is installed
 
-```bash
+```batch
 cs --version
 ```
 
-2. Check that Java is installed
+It should print:
 
-```bash
+```
+2.0.13
+```
+
+#### 2. Check that Java is installed
+
+```batch
 java -version
 ```
 
-3. Check that scala is installed
+It should print something like:
+```
+openjdk version "1.8.0_292"
+OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_292-b10)
+OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.292-b10, mixed mode)
+```
 
-```bash
+#### 3. Check that scala is installed
+
+```batch
 scala -version
+```
+
+It should print:
+```
+Scala code runner version 2.13.6 -- Copyright 2002-2021, LAMP/EPFL and Lightbend, Inc.
 ```

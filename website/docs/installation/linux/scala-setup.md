@@ -19,7 +19,7 @@ Coursier is the Scala artifact fetcher, we will use it to download the indispens
 ![Open terminal](/img/installation/linux/terminal.png)
 
 :::tip
-To execute an action in the terminal you must type a command then hit the `Enter` button.
+To execute an action in the terminal you must type a command then hit `Enter` on the keyboard.
 For example, you can type the `pwd` command to print the working directory:
 
 Try it yourself: copy paste the command below into the terminal and hit `Enter`.
@@ -85,7 +85,7 @@ java -version
 ```
 
 It should print something like:
-```bash
+```
 openjdk version "1.8.0_275"
 OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_275-b01)
 OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.275-b01, mixed mode)
