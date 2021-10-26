@@ -40,9 +40,9 @@ The dimensions of the grid are specified in the `World` case class:
  - `height` is the number of rows of the grid. We will use of the convention of naming `y` the variables indicating vertical position
  - `width` is the number of columns of the grid. We will use of the convention of naming `x` the variables indicating horizontal position
  - The top left corner of the grid has position `(x=0, y=0)`
- - The top right corner of the grid has position `(x=width, y=0)`
- - The bottom left corner of the grid has position `(x=0, y=height)`
- - The bottom right corner of the grid has position `(x=width, y=height)`
+ - The top right corner of the grid has position `(x=width-1, y=0)`
+ - The bottom left corner of the grid has position `(x=0, y=height-1)`
+ - The bottom right corner of the grid has position `(x=width-1, y=height-1)`
 
 ![the grid](/img/snake/grid.png)
 
