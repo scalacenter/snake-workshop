@@ -1,5 +1,5 @@
 class TestWrap extends munit.FunSuite:
-  val size = Size(19, 23)
+  val size = Size(width = 23, height = 19)
 
   test("wrap x to 0 at or after max width") {
     val width = 23

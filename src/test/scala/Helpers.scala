@@ -1,5 +1,5 @@
 def body(nodes: (Int, Int)*) =
-  (nodes map (Node(_, _))).toList
+  (nodes map (Block(_, _))).toList
 
 def snake(dir: Direction, head: (Int, Int), nodes: (Int, Int)*) =
   Snake(dir, body((head +: nodes)*))
@@ -12,7 +12,7 @@ def noAction = Option.empty[UserInput]
 
 def validSnake(world: World) =
   val snake = world.snake
-  def areConnected(n1: Node, n2: Node) =
+  def areConnected(n1: Block, n2: Block) =
     val maxX = math.max(n1.x, n2.x)
     val minX = math.min(n1.x, n2.x)
     val maxY = math.max(n1.y, n2.y)
