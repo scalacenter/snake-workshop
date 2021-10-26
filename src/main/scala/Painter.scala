@@ -13,8 +13,19 @@ class Painter(scale: Int):
       ctx.fillRect(x * scale, y * scale, scale, scale)
     }
 
-  private def paintSnake(snake: Snake, holder: ContextHolder): Unit =
+  private def paintHead(head: Block, holder: ContextHolder): Unit =
+    val Block(x, y) = head
     holder.use { ctx =>
       ctx.fillStyle = "#FFFFFF"
-      for Block(x, y) <- snake.body do ctx.fillRect(x * scale, y * scale, scale, scale)
+      ctx.fillRect(x * scale, y * scale, scale, scale)
     }
+
+  private def paintTail(tail: List[Block], holder: ContextHolder): Unit =
+    holder.use { ctx =>
+      ctx.fillStyle = "#AAAAAA"
+      for Block(x, y) <- tail do ctx.fillRect(x * scale, y * scale, scale, scale)
+    }
+
+  private def paintSnake(snake: Snake, holder: ContextHolder): Unit =
+    paintHead(snake.body.head, holder)
+    paintTail(snake.body.tail, holder)
