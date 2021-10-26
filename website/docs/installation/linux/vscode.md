@@ -16,7 +16,7 @@ In this page we will install VS Code and two extensions:
 
 ## Install VS Code
 
-#### 1. Go to https://code.visualstudio.com/Download
+#### 1. Go to Visual Studio [download page](https://code.visualstudio.com/Download)
 #### 2. Download the `.deb` package.
 
 ![Download VS Code](/img/installation/linux/download-vscode.png)

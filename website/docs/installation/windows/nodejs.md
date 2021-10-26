@@ -17,7 +17,7 @@ This page is reserved for **Windows** users. Instructions for other operating sy
 #### 2. Execute the downloaded  `node-v14.18.1-x64.msi` file.
 
 #### 3. Follow the installation steps:
-- Read and accept the term and license agreement.
+- Accept the term and license agreement.
 - Keep next several times to keep the default options.
 - Click `Install`.
 

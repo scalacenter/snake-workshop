@@ -12,27 +12,19 @@ This page is reserved for **Windows** users. Instructions for other operating sy
 
 ## Install Scala using Coursier
 
-Coursier is the Scala artifact fetcher, we will use it to download the indispensable Scala toolbox.
+Coursier is the Scala artifact fetcher, we will use it to install the standard Scala toolbox.
 
 #### 1. Download Visual C++ Redistribuable from [Microsoft website](https://www.microsoft.com/en-us/download/details.aspx?id=48145).
 
 ![Download vc_redist.x64.exe](/img/installation/windows/redist.png)
 
-#### 2. Execute the downloaded `VC_redist.x64.exe` and follow the installation steps.
+#### 2. Execute the downloaded `VC_redist.x64.exe` and follow the installation steps:
+- Agree the license terms and conditions
+- Click Install
 
 #### 3. Open the Command Prompt.
 
 ![Open Command Prompt](/img/installation/windows/cmd.png)
-
-:::tip
-To execute an action in the Command Prompt you must type a command then hit `Enter` on the keyboard.
-For example, you can type the `dir` command to print information about the current directory:
-
-Try it yourself: copy paste the command below into the terminal and hit `Enter`.
-```batch
-dir
-```
-:::
 
 #### 4. In the Command Prompt, download the `cs.exe` file:
 
@@ -46,8 +38,6 @@ bitsadmin /transfer cs-cli https://git.io/coursier-cli-windows-exe "%cd%\cs.exe"
 .\cs setup --yes
 ```
 
-#### 6. Close and reopen the Command Prompt to refresh the environment variables.
-
 #### 7. Finally, you can remove the coursier file:
 
 ```batch
@@ -56,7 +46,9 @@ del cs.exe
 
 ## Check the installation of Scala
 
-#### 1. Check that Coursier is installed
+#### 1. Close and reopen the Command Prompt to refresh the environment variables.
+
+#### 2. Check that Coursier is installed:
 
 ```batch
 cs --version
@@ -68,7 +60,7 @@ It should print:
 2.0.13
 ```
 
-#### 2. Check that Java is installed
+#### 3. Check that Java is installed:
 
 ```batch
 java -version
@@ -81,7 +73,7 @@ OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_292-b10)
 OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.292-b10, mixed mode)
 ```
 
-#### 3. Check that scala is installed
+#### 4. Check that Scala is installed:
 
 ```batch
 scala -version

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Git
@@ -10,7 +10,9 @@ This page is reserved for **Windows** users. Instructions for other operating sy
 - [**Install - Mac**](../mac/git)
 :::
 
-#### 1. Go to Git [download page](https://git-scm.com/download) and click `Download for Windows`
+#### 1. Go to Git [download page](https://git-scm.com/download).
+
+#### 2. Click the `Download for Windows` button:
 
 ![Download Git](/img/installation/windows/git-download.png)
 
@@ -28,9 +30,9 @@ Or you can choose any other editor you are already familiar with.
 - Click `Install`.
 - Click `Finish`.
 
-#### 4. Follow the steps until Git is installed. (All other default options are okay)
+#### 4. Follow the steps until Git is installed. (All other default options are okay).
 
-#### 5. Check that Git is installed in a new Command Prompt
+#### 5. Check that Git is installed in a new Command Prompt.
 ```batch
 git --version
 ```

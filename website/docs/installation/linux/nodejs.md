@@ -16,7 +16,7 @@ This page is reserved for **Linux** users. Instructions for other operating syst
 
 #### 2. Add Nodesource to your `apt` sources
 ```bash
-curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 ```
 
 #### 3. Install Node.js
@@ -32,7 +32,7 @@ node --version
 
 It should print:
 ```
-v16.12.0
+v14.18.1
 ```
 
 #### 5. Check that npm is installed
@@ -42,6 +42,6 @@ npm --version
 
 It should print:
 ```
-8.1.0
+6.14.15
 ```
 
