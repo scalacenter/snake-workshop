@@ -23,7 +23,7 @@ The state of the game at any given time is represented by the `World` class
 case class World(snake: Snake, fruit: Fruit, height: Int, width: Int)
 ```
 
-in other words, each object of type `World` is a photograph of the state of the game.
+in other words, each object of type `World` is a photograph of the state of the game. It contains a snake, a fruit, and it has a height and a width.
 
 The goal of this workshop is to implement the `nextWorld` function which, provided the previous state of the game and the action of the player,
 returns the next state of the world.
@@ -71,7 +71,7 @@ If you have a fruit, you can read its `x` and `y` attributes using `fruit.x` and
 
 ### Snake
 
-A snake is made up of blocks, or nodes. Each node has an `x` and `y` coordinate.
+A snake is made up of blocks, or nodes. Each node has an `x` and `y` coordinates.
 All of the nodes of a snake are collected into a list.
 The snake also contains the direction in which it is moving.
 
@@ -86,7 +86,7 @@ This means that any `Direction` can take only one of the values `Up`, `Down`, `L
 The only way to create a `Direction` is to access one of the cases:
 
 ```scala
-val right = Direction.right
+val right = Direction.Right
 ```
 
 ### List
@@ -153,7 +153,7 @@ def evenTest(x: Int): String =
   else "x is odd"
 ```
 
-To test multiple conditions you can chain expressions:
+To test multiple conditions you can chain conditions with `else if`:
 
 ```scala
 def binary(x: Int): String =
@@ -162,7 +162,7 @@ def binary(x: Int): String =
   else "What is this?"
 ```
 
-Finally Scala provides pattern matching. This feature supports many syntaxes but for this workshop we will use it only on simple enums.
+Finally, Scala supports pattern matching. This feature accepts many syntaxes but for this workshop we will use it only on simple enums.
 
 ```scala
 def directionToString(direction: Direction): String =
