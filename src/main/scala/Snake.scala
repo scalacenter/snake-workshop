@@ -29,20 +29,34 @@ def score(world: World): Int = world.snake.body.length - 1
   * If the fruit and snake's head have an equal position, then the snake eats the fruit.
   *
   * hint: Use the `head` method on the `body` field of snake to get the head of the snake. The positition of the snake's
-  * head is the head of the snake. The position of the fruit is accessed from the `position` field.
-  * We can test that two nodes are equal using `==`.
+  * head is the head of the snake. The position of the fruit is accessed from the `position` field. We can test that two
+  * nodes are equal using `==`.
   */
 def eatsFruit(snake: Snake, fruit: Fruit): Boolean =
   fruit.block == snake.body.head
 
-// student (consider cheatsheet for list methods)
+/** Returns the tail of the snake in the next frame of the game.
+  *
+  * If the snake is eating a fruit, then its current body will become its next tail, otherwise return the current body
+  * with its rightmost block removed.
+  *
+  * hint: ???
+  */
 def nextTail(snake: Snake, isEating: Boolean): List[Block] =
   if isEating then snake.body
   else snake.body.dropRight(1)
 
-// ******** Part 2 ********
+// ******** Part 2 - change direction based on user input ********
 
-// student
+/** Returns the direction that is opposite to the given direction
+  *
+  *   - The opposite of up is down
+  *   - The opposite of down is up
+  *   - The opposite of left is right
+  *   - The opposite of right is left
+  *
+  * hint: ??? (use pattern match with literal pattern)
+  */
 def opposite(direction: Direction): Direction =
   direction match
     case Direction.Up    => Direction.Down
@@ -50,7 +64,14 @@ def opposite(direction: Direction): Direction =
     case Direction.Left  => Direction.Right
     case Direction.Right => Direction.Left
 
-// student
+/** Returns the new direction that the snake will face, depending on if input was provided
+  *
+  * If the `inputDirection` is `None`, then return the `currentDirection`; otherwise if the `inputDirection` is
+  * `Some(newDirection)` and `newDirection` is not the opposite of `currentDirection`, then return the `newDirection`,
+  * else return the `currentDirection`
+  *
+  * hint: ??? (use opposite)
+  */
 def nextDirection(currentDirection: Direction, inputDirection: Option[Direction]): Direction =
   inputDirection match
     case Some(newDirection) =>
@@ -59,21 +80,31 @@ def nextDirection(currentDirection: Direction, inputDirection: Option[Direction]
     case None =>
       currentDirection
 
-// ******** Part 3 ********
+// ******** Part 3 - updating the snake's head ********
 
 /** Helper method to wrap an x-ordinate around the world boundary */
-def wrapX(worldSize: Size, x: Int) =
+def wrapX(worldSize: Size, x: Int): Int =
   if x >= worldSize.width then 0
   else if x < 0 then worldSize.width - 1
   else x
 
-/** Helper method to wrap a y-ordinate around the world boundary */
-def wrapY(worldSize: Size, y: Int) = // student
+/** Helper method to wrap a y-ordinate around the world boundary
+  *
+  * hint: follow the model of `wrapX` and instead compare against the height.
+  */
+def wrapY(worldSize: Size, y: Int): Int =
   if y >= worldSize.height then 0
   else if y < 0 then worldSize.height - 1
   else y
 
-// student
+/** Returns the head of the snake in the next frame of the game.
+  *
+  * The snakes next head should be translated in either the x, or y axis by 1 block, in the direction indicated
+  * by `nextDirection`. If the snakes head would go beyond the boundary of the world, indicated by `worldSize` it
+  * should instead wrap back to the 0 position of the axis it is travelling into.
+  *
+  * hint: ???
+  */
 def nextHead(snake: Snake, nextDirection: Direction, worldSize: Size): Block =
   val head = snake.body.head
   nextDirection match
@@ -109,8 +140,7 @@ def nextWorld(world: World, inputDirection: Option[Direction]): World =
   *
   * If the snake's tail contains the snake's head, then the snake has bit itself.
   *
-  * hint: Use the `head` and `tail` methods on `body` field of snake to get the head
-  * and tail of the snake.
+  * hint: Use the `head` and `tail` methods on `body` field of snake to get the head and tail of the snake.
   */
 def bitItself(snake: Snake): Boolean =
   snake.body.tail.contains(snake.body.head)
@@ -124,13 +154,3 @@ def updateGame(world: World, input: Option[UserInput]): World | GameOver.type =
     case None                               => nextWorld(world, None) // student
 
 // ******** END ********
-
-/*
- * end of workshop. BUT time for expansion. Possible ideas:
- - Better graphics: images, colors, text, effects
- - Richer game engine: accelerate after fruit, fruits with different weight,
-                       walls etc
- - toggle pause
- - context parameter for canvas context
- - make snake always have a head?
- */
