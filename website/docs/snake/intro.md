@@ -86,7 +86,7 @@ This means that any `Direction` can take only one of the values `Up`, `Down`, `L
 The only way to create a `Direction` is to access one of the cases:
 
 ```scala
-val right = Direction.right
+val right = Direction.Right
 ```
 
 ### List
