@@ -9,6 +9,25 @@ class TestMovement extends munit.FunSuite:
   val baseWorld = World(snake(Right, 0 -> 0), Fruit(Node(4, 0)), Size(30, 30))
   val snakeLength4 = snake(Down, 1 -> 1, 2 -> 1, 3 -> 1, 4 -> 1)
 
+  test("can't reverse snake onto itself") {
+    testOneMoveSnake(arrow(Down))(
+      before = snake(Up, 0 -> 0),
+      after = snake(Up, 0 -> 29)
+    )
+    testOneMoveSnake(arrow(Up))(
+      before = snake(Down, 0 -> 0),
+      after = snake(Down, 0 -> 1)
+    )
+    testOneMoveSnake(arrow(Left))(
+      before = snake(Right, 0 -> 0),
+      after = snake(Right, 1 -> 0)
+    )
+    testOneMoveSnake(arrow(Right))(
+      before = snake(Left, 0 -> 0),
+      after = snake(Left, 29 -> 0)
+    )
+  }
+
   test("move 1 square in current direction when empty input") {
     testOneMoveSnake(noAction)(
       before = snake(Right, 0 -> 0),
@@ -41,20 +60,12 @@ class TestMovement extends munit.FunSuite:
       before = snake(Left, 0 -> 0),
       after = snake(Down, 0 -> 1)
     )
-    testOneMoveSnake(arrow(Down))(
-      before = snake(Up, 0 -> 0),
-      after = snake(Up, 0 -> 29)
-    )
   }
 
   test("move 1 square up when up arrow") {
     testOneMoveSnake(arrow(Up))(
       before = snake(Right, 0 -> 0),
       after = snake(Up, 0 -> 29)
-    )
-    testOneMoveSnake(arrow(Up))(
-      before = snake(Down, 0 -> 0),
-      after = snake(Down, 0 -> 1)
     )
     testOneMoveSnake(arrow(Up))(
       before = snake(Left, 0 -> 0),
@@ -67,10 +78,6 @@ class TestMovement extends munit.FunSuite:
   }
 
   test("move 1 square left when left arrow") {
-    testOneMoveSnake(arrow(Left))(
-      before = snake(Right, 0 -> 0),
-      after = snake(Right, 1 -> 0)
-    )
     testOneMoveSnake(arrow(Left))(
       before = snake(Down, 0 -> 0),
       after = snake(Left, 29 -> 0)
@@ -93,10 +100,6 @@ class TestMovement extends munit.FunSuite:
     testOneMoveSnake(arrow(Right))(
       before = snake(Down, 0 -> 0),
       after = snake(Right, 1 -> 0)
-    )
-    testOneMoveSnake(arrow(Right))(
-      before = snake(Left, 0 -> 0),
-      after = snake(Left, 29 -> 0)
     )
     testOneMoveSnake(arrow(Right))(
       before = snake(Up, 0 -> 0),
