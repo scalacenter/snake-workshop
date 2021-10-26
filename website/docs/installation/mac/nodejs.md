@@ -12,7 +12,7 @@ This page is reserved for **Mac** users. Instructions for other operating system
 
 #### 1. Go to Node.js [download page](https://nodejs.org/en/download/) and click the `macOS Installer` button.
 
-![Download Node.js](/img/installation/windows/nodejs-download.png)
+![Download Node.js](/img/installation/mac/nodejs-download.png)
 
 #### 2. Execute the downloaded  `node-v14.18.1.pkg` file.
 
