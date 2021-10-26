@@ -23,7 +23,7 @@ The state of the game at any given time is represented by the `World` class
 case class World(snake: Snake, fruit: Fruit, height: Int, width: Int)
 ```
 
-in other words, each object of type `World` is a photograph of the state of the game.
+in other words, each object of type `World` is a photograph of the state of the game. It contains a snake, a fruit, and it has a height and a width.
 
 The goal of this workshop is to implement the `nextWorld` function which, provided the previous state of the game and the action of the player,
 returns the next state of the world.
