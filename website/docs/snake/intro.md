@@ -162,7 +162,7 @@ def binary(x: Int): String =
   else "What is this?"
 ```
 
-Finally Scala provides pattern matching. This feature supports many syntaxes but for this workshop we will use it only on simple enums.
+Finally, Scala supports pattern matching. This feature accepts many syntaxes but for this workshop we will use it only on simple enums.
 
 ```scala
 def directionToString(direction: Direction): String =
