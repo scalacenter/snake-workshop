@@ -16,5 +16,5 @@ class Painter(scale: Int):
   private def paintSnake(snake: Snake, holder: ContextHolder): Unit =
     holder.use { ctx =>
       ctx.fillStyle = "#FFFFFF"
-      for Node(x, y) <- (snake.head :: snake.body) do ctx.fillRect(x * scale, y * scale, scale, scale)
+      for Node(x, y) <- snake.body do ctx.fillRect(x * scale, y * scale, scale, scale)
     }

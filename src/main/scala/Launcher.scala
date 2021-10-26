@@ -3,7 +3,7 @@ import org.scalajs.dom.{KeyboardEvent, CanvasRenderingContext2D}
 
 // the primary world state
 def initWorld = World(
-  snake = Snake(Direction.Right, Node(0, 0), Nil),
+  snake = Snake(Direction.Right, Node(0, 0) :: Nil),
   fruit = Fruit(Node(4, 0)),
   size = Size(width = 30, height = 30)
 )

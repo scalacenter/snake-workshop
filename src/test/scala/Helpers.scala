@@ -2,7 +2,7 @@ def body(nodes: (Int, Int)*) =
   (nodes map (Node(_, _))).toList
 
 def snake(dir: Direction, head: (Int, Int), nodes: (Int, Int)*) =
-  Snake(dir, Node.apply.tupled(head), body(nodes*))
+  Snake(dir, body((head +: nodes)*))
 
 // helpers to create user inputs
 def arrow(dir: Direction) = Some(UserInput.Arrow(dir))

@@ -19,7 +19,7 @@ enum UserInput:
   case Pause // The pause key was pressed
   case Reset // The reset key was pressed
 
-case class Snake(direction: Direction, head: Node, body: List[Node])
+case class Snake(direction: Direction, body: List[Node])
 
 def nextFromInput(world: World, input: Option[UserInput]): World | GameOver.type =
   input match
@@ -39,7 +39,7 @@ def nextSnake(snake: Snake, inputDirection: Option[Direction], isEating: Boolean
   val newDir = nextDirection(snake.direction, inputDirection)
   val newHead = nextHead(snake, newDir, size)
   val newBody = nextBody(snake, isEating)
-  Snake(newDir, newHead, newBody)
+  Snake(newDir, newHead :: newBody)
 
 def createRandomFruit(size: Size): Fruit =
   val x = Random.nextInt(size.width)
@@ -48,15 +48,15 @@ def createRandomFruit(size: Size): Fruit =
 
 // student
 def bitItself(snake: Snake): Boolean =
-  snake.body.contains(snake.head)
+  snake.body.tail.contains(snake.body.head)
 
 // student
 def eatsFruit(snake: Snake, fruit: Fruit): Boolean =
-  fruit.position == snake.head
+  fruit.position == snake.body.head
 
 // student
 def nextHead(snake: Snake, nextDirection: Direction, size: Size): Node =
-  val head = snake.head
+  val head = snake.body.head
   nextDirection match
     case Direction.Up    => head.copy(y = wrapY(size, head.y - 1))
     case Direction.Down  => head.copy(y = wrapY(size, head.y + 1))
@@ -65,9 +65,8 @@ def nextHead(snake: Snake, nextDirection: Direction, size: Size): Node =
 
 // student (consider cheatsheet for list methods)
 def nextBody(snake: Snake, isEating: Boolean): List[Node] =
-  val newBody = snake.head :: snake.body
-  if isEating then newBody
-  else newBody.dropRight(1)
+  if isEating then snake.body
+  else snake.body.dropRight(1)
 
 // student
 def wrapX(size: Size, x: Int) =
