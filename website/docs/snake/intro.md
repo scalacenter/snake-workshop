@@ -173,4 +173,15 @@ def directionToString(direction: Direction): String =
     case Direction.Left => "You chose Left"
 ```
 
+After `List`, another common type in Scala is `Option[T]` which is used to express that a `T` might not be provided.
+For example in `Snake.scala`, `onTick` is called periodically to advance the game.
+During that time the user might have pressed a button or not.
+You can use pattern matching to process `Option`s:
 
+```scala
+input match
+  case Some(UserInput.Pause) => // user pressed pause
+  case Some(UserInput.Reset) => // user pressed Reset
+  case Some(UserInput.Arrow(direction)) => // user pressed arrow key pointing towards direction
+  case None => // User did not press any key
+```
