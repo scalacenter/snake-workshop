@@ -16,14 +16,16 @@ In this page we will install VS Code and two extensions:
 
 ## Install VS Code
 
-#### 1. Go to Visual Studio [download page](https://code.visualstudio.com/Download) and Click on the Windows download button:
+#### 1. Go to Visual Studio [download page](https://code.visualstudio.com/Download) 
+
+#### 2. Download the Windows installer:
 
 ![Download VS Code](/img/installation/windows/vscode-download.png)
 
-#### 2. Execute the downloaded `VSCodeUserSetup-x64-1.61.2.exe` file.
+#### 3. Execute the downloaded `VSCodeUserSetup-x64-1.61.2.exe` file.
 
-#### 3. Follow the installation steps:
-- Read and accept the agreement.
+#### 4. Follow the installation steps:
+- Accept the agreement.
 - Click `Next` several times to keep all the default options.
 - Click `Install`.
 - Click `Finish`.

@@ -12,21 +12,11 @@ This page is reserved for **Linux** users. Instructions for other operating syst
 
 ## Install Scala using Coursier
 
-Coursier is the Scala artifact fetcher, we will use it to download the indispensable Scala toolbox.
+Coursier is the Scala artifact fetcher, we will use it to install the standard Scala toolbox.
 
 #### 1. Open a terminal.
 
 ![Open terminal](/img/installation/linux/terminal.png)
-
-:::tip
-To execute an action in the terminal you must type a command then hit `Enter` on the keyboard.
-For example, you can type the `pwd` command to print the working directory:
-
-Try it yourself: copy paste the command below into the terminal and hit `Enter`.
-```bash
-pwd
-```
-:::
 
 #### 2. In the terminal, download the `cs` file:
 
@@ -66,7 +56,7 @@ rm cs
 
 ## Check the installation of Scala
 
-#### 1. Check that Coursier is installed
+#### 1. Check that Coursier is installed:
 
 ```bash
 cs --version
@@ -78,7 +68,7 @@ It should print:
 2.0.16
 ```
 
-#### 2. Check that Java is installed
+#### 2. Check that Java is installed:
 
 ```bash
 java -version
@@ -91,7 +81,7 @@ OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_275-b01)
 OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.275-b01, mixed mode)
 ```
 
-#### 3. Check that scala is installed
+#### 3. Check that Scala is installed:
 
 ```bash
 scala -version

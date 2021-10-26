@@ -5,43 +5,38 @@ sidebar_position: 4
 # Node.js
 
 :::caution
-This page is reserved for **Linux** users. Instructions for other operating system can be found in:
-- [**Install - Mac**](../mac/nodejs)
+This page is reserved for **Mac** users. Instructions for other operating system can be found in:
+- [**Install - Linux**](../linux/nodejs)
 - [**Install - Windows**](../windows/nodejs)
 :::
 
-1. Open the terminal
+#### 1. Go to Node.js [download page](https://nodejs.org/en/download/) and click the `macOS Installer` button.
 
-![Open terminal](/img/installation/linux/terminal.png)
+![Download Node.js](/img/installation/windows/nodejs-download.png)
 
-2. Add Nodesource to your `apt` sources
-```bash
-curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -
-```
+#### 2. Execute the downloaded  `node-v14.18.1.pkg` file.
 
-3. Install Node.js
+#### 3. Follow the installation steps:
+- Click `Continue` to accept the terms and to keep the default options.
+- Click `Install`.
 
-```bash
-sudo apt-get install -y nodejs
-```
-
-4. Check that Node.js is installed
-```bash
+#### 4. Check that Node.js is installed
+```batch
 node --version
 ```
 
 It should print:
 ```
-v17.0.1
+v14.18.1
 ```
 
-5. Check that npm is installed
-```bash
+#### 5. Check that npm is installed
+```batch
 npm --version
 ```
 
 It should print:
 ```
-8.1.0
+6.14.15
 ```
 

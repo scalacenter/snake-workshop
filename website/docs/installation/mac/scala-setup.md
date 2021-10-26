@@ -2,67 +2,70 @@
 sidebar_position: 1
 ---
 
-# Setup Scala  - TODO
+# Setup Scala
 
 :::caution
 This page is reserved for **Mac** users. Instructions for other operating system can be found in:
-- [**Install - Linux**](../linux/scala-setup)
+- [**Install - Linuw**](../linux/scala-setup)
 - [**Install - Windows**](../windows/scala-setup)
 :::
 
 ## Install Scala using Coursier
 
-Coursier is the Scala artifact fetcher, we will use it to download the indispensable Scala toolbox.
+Coursier is the Scala artifact fetcher, we will use it to install the standard Scala toolbox.
 
-1. Open a terminal.
-2. In the terminal, download couriser by copy-pasting and executing:
+#### 1. Open a terminal.
 
-```bash
-curl -fLo cs https://git.io/coursier-cli-"$(uname | tr LD ld)"
-```
+![Open terminal](/img/installation/mac/terminal.png)
 
-3. Make the downloaded file executable with:
+#### 2. In the terminal, install `cs` using Homebrew:
 
 ```bash
-chmod +x cs
+brew install coursier/formulas/coursier
 ```
 
-4. Execute the coursier file to setup scala:
+:::info
+If you have never used Homebrew before, you can install it with:
 
 ```bash
-./cs setup
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+:::
+
+#### 3. Use Coursier to setup scala:
+
+```bash
+cs setup --yes
 ```
 
-5. If prompted to install Java, hit `Enter` to validate
-6. If prompted to uptade your `.profile` file, hit `Enter` to validate 
-7. Reload your `.profile` file:
+#### 5. Reload your `.profile` file:
 
 ```bash
 . ~/.profile
 ```
 
-8. Finally, you can remove the coursier file:
-
-```bash
-rm cs
-```
-
 ## Check the installation of Scala
 
-1. Check that Coursier is installed
-
-```bash
-cs --version
-```
-
-2. Check that Java is installed
+#### 1. Check that Java is installed:
 
 ```bash
 java -version
 ```
 
-3. Check that scala is installed
+It should print something like:
+```
+openjdk version "1.8.0_275"
+OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_275-b01)
+OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.275-b01, mixed mode)
+```
+
+#### 2. Check that Scala is installed:
 
 ```bash
 scala -version
+```
+
+It should print:
+```
+Scala code runner version 2.13.6 -- Copyright 2002-2021, LAMP/EPFL and Lightbend, Inc.
 ```
