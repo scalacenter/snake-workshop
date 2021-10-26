@@ -3,7 +3,7 @@ import Direction.*
 class TestDirection extends munit.FunSuite:
 
   inline def testOneMoveDirection(input: Option[Direction])(before: Direction, after: Direction) =
-    assertEquals(before.nextDirection(input), after)
+    assertEquals(nextDirection(before, input), after)
 
   test("continue move when empty input") {
     testOneMoveDirection(None)(before = Up, after = Up)

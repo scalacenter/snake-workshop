@@ -5,34 +5,28 @@ import org.scalajs.dom.{KeyboardEvent, CanvasRenderingContext2D}
 def initWorld = World(
   snake = Snake(Direction.Right, Node(0, 0), Nil),
   fruit = Fruit(Node(4, 0)),
-  dimension = World.Dimension(width = 30, height = 30)
+  size = Size(width = 30, height = 30)
 )
-
-// helpers to create user inputs
-def arrow(dir: Direction) = Some(UserInput.Arrow(dir))
-def pause = Some(UserInput.Pause)
-def reset = Some(UserInput.Reset)
-def noAction = Option.empty[UserInput]
 
 // Converts keyboard input to UserInput
 def inputFromKey(key: String, current: Option[UserInput]): Option[UserInput] =
   key match
-    case "ArrowUp"    => arrow(Direction.Up)
-    case "ArrowDown"  => arrow(Direction.Down)
-    case "ArrowLeft"  => arrow(Direction.Left)
-    case "ArrowRight" => arrow(Direction.Right)
-    case "p"          => pause
-    case "r"          => reset
+    case "ArrowUp"    => Some(UserInput.Arrow(Direction.Up))
+    case "ArrowDown"  => Some(UserInput.Arrow(Direction.Down))
+    case "ArrowLeft"  => Some(UserInput.Arrow(Direction.Left))
+    case "ArrowRight" => Some(UserInput.Arrow(Direction.Right))
+    case "p"          => Some(UserInput.Pause)
+    case "r"          => Some(UserInput.Reset)
     case _            => current
 
 def nextGame(world: World, input: Option[UserInput]) =
-  nextWorld(world, input) match
+  nextFromInput(world, input) match
     case GameOver     => initWorld
     case world: World => world
 
 def nextInput(input: Option[UserInput]) =
-  if input == pause then input
-  else noAction
+  if input == Some(UserInput.Pause) then input
+  else None
 
 def gameLoop(holder: ContextHolder) =
   // painter handles rendering to the canvas
@@ -40,7 +34,7 @@ def gameLoop(holder: ContextHolder) =
 
   // mutable game state
   var world = initWorld
-  var userInput = noAction
+  var userInput = Option.empty[UserInput]
 
   // updates the game state, representing 1 tick of game-time
   def tick() =
