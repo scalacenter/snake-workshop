@@ -22,7 +22,7 @@ case class Snake(direction: Direction, body: List[Block])
 
 def score(world: World): Int = world.snake.body.length - 1
 
-// ********
+// ******** Part 1 - updating the snake's tail ********
 
 /** Tests if the snake is eating the fruit.
   *
@@ -36,11 +36,11 @@ def eatsFruit(snake: Snake, fruit: Fruit): Boolean =
   fruit.block == snake.body.head
 
 // student (consider cheatsheet for list methods)
-def nextBody(snake: Snake, isEating: Boolean): List[Block] =
+def nextTail(snake: Snake, isEating: Boolean): List[Block] =
   if isEating then snake.body
   else snake.body.dropRight(1)
 
-// ********
+// ******** Part 2 ********
 
 // student
 def opposite(direction: Direction): Direction =
@@ -59,14 +59,16 @@ def nextDirection(currentDirection: Direction, inputDirection: Option[Direction]
     case None =>
       currentDirection
 
-// ********
+// ******** Part 3 ********
 
+/** Helper method to wrap an x-ordinate around the world boundary */
 def wrapX(worldSize: Size, x: Int) =
   if x >= worldSize.width then 0
   else if x < 0 then worldSize.width - 1
   else x
 
-def wrapY(worldSize: Size, y: Int) =
+/** Helper method to wrap a y-ordinate around the world boundary */
+def wrapY(worldSize: Size, y: Int) = // student
   if y >= worldSize.height then 0
   else if y < 0 then worldSize.height - 1
   else y
@@ -80,15 +82,15 @@ def nextHead(snake: Snake, nextDirection: Direction, worldSize: Size): Block =
     case Direction.Left  => Block(x = wrapX(worldSize, head.x - 1), y = head.y)
     case Direction.Right => Block(x = wrapX(worldSize, head.x + 1), y = head.y)
 
-// ********
+// ******** Part 4 ********
 
 def nextSnake(snake: Snake, inputDirection: Option[Direction], isEating: Boolean, worldSize: Size): Snake =
   val newDir = nextDirection(snake.direction, inputDirection)
   val newHead = nextHead(snake, newDir, worldSize)
-  val newBody = nextBody(snake, isEating)
-  Snake(newDir, newHead :: newBody)
+  val newTail = nextTail(snake, isEating)
+  Snake(newDir, newHead :: newTail)
 
-// ********
+// ******** Part 5 ********
 
 def createRandomFruit(worldSize: Size): Fruit =
   val x = Random.nextInt(worldSize.width)
@@ -101,13 +103,13 @@ def nextWorld(world: World, inputDirection: Option[Direction]): World =
   val newFruit: Fruit = if isEating then createRandomFruit(world.size) else world.fruit
   World(newSnake, newFruit, world.size)
 
-// ********
+// ******** Part 6 ********
 
 /** Tests if the snakes head has collided with the rest of its body.
   *
   * If the snake's tail contains the snake's head, then the snake has bit itself.
   *
-  * hint: Use the `head` and `tail` methods on `body` fielf of snake to get the head
+  * hint: Use the `head` and `tail` methods on `body` field of snake to get the head
   * and tail of the snake.
   */
 def bitItself(snake: Snake): Boolean =
@@ -121,7 +123,7 @@ def updateGame(world: World, input: Option[UserInput]): World | GameOver.type =
     case Some(UserInput.Arrow(direction))   => nextWorld(world, Some(direction)) // student
     case None                               => nextWorld(world, None) // student
 
-// ********
+// ******** END ********
 
 /*
  * end of workshop. BUT time for expansion. Possible ideas:
