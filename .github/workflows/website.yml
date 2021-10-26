@@ -5,7 +5,7 @@ on:
     branches:
       - website
   push:
-    branches
+    branches:
      - website
 
 jobs:
