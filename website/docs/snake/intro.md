@@ -153,7 +153,7 @@ def evenTest(x: Int): String =
   else "x is odd"
 ```
 
-To test multiple conditions you can chain expressions:
+To test multiple conditions you can chain conditions with `else if`:
 
 ```scala
 def binary(x: Int): String =
