@@ -23,6 +23,7 @@ case class Snake(direction: Direction, body: List[Block])
 def score(world: World): Int = world.snake.body.length - 1
 
 // ******** Part 1 - growing the snake, based on if it ate the fruit ********
+// More info at https://scalacenter.github.io/snake-workshop/docs/snake/step-by-step#part-1-growing-the-snake
 
 /** Tests if the snake is eating the fruit.
   *
@@ -49,6 +50,8 @@ def nextTail(snake: Snake, isEating: Boolean): List[Block] =
 /** Returns the direction that is opposite to the provided direction, e.g. The opposite of up is down.
   *
   * hint: look up "Pattern matching" in the "Introduction to Scala" page of the website.
+  * 
+  * More info at: https://scalacenter.github.io/snake-workshop/docs/snake/step-by-step#part-2-reacting-to-players-input
   */
 def opposite(direction: Direction): Direction =
   ???
@@ -64,6 +67,7 @@ def nextDirection(currentDirection: Direction, inputDirection: Option[Direction]
   ???
 
 // ******** Part 3 - Moving the snake's head, based on its new direction ********
+// More info at: https://scalacenter.github.io/snake-workshop/docs/snake/step-by-step#part-3-moving-the-head
 
 /** Helper method to wrap an x-ordinate around the world boundary */
 def wrapX(worldSize: Size, x: Int): Int =
@@ -89,6 +93,7 @@ def nextHead(snake: Snake, nextDirection: Direction, worldSize: Size): Block =
   ???
 
 // ******** Part 4 - Updating the snake, based on user input and if it ate the fruit ********
+// More info at: https://scalacenter.github.io/snake-workshop/docs/snake/step-by-step#part-4-updating-the-snake
 
 /** Returns the snake in the next frame of the game.
   *
@@ -101,6 +106,7 @@ def nextSnake(snake: Snake, inputDirection: Option[Direction], isEating: Boolean
   ???
 
 // ******** Part 5 - Updating the world, based on user input ********
+// More info at: https://scalacenter.github.io/snake-workshop/docs/snake/step-by-step#part-5-updating-the-world
 
 /** Returns a new fruit with a random position, fitting within the boundary of the world.
   */
@@ -123,6 +129,7 @@ def nextWorld(world: World, inputDirection: Option[Direction]): World =
   ???
 
 // ******** Part 6 - Updating the game, based on user input ********
+// More info at: https://scalacenter.github.io/snake-workshop/docs/snake/step-by-step#part-6-updating-the-game
 
 /** Tests if the snake's head has collided with the rest of its body.
   *
