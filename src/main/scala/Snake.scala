@@ -46,12 +46,11 @@ def nextTail(snake: Snake, isEating: Boolean): List[Block] =
   ???
 
 // ******** Part 2 - Reacting to player's input, changing the snake's direction ********
+// More info at: https://scalacenter.github.io/snake-workshop/docs/snake/step-by-step#part-2-reacting-to-players-input
 
 /** Returns the direction that is opposite to the provided direction, e.g. The opposite of up is down.
   *
   * hint: look up "Pattern matching" in the "Introduction to Scala" page of the website.
-  * 
-  * More info at: https://scalacenter.github.io/snake-workshop/docs/snake/step-by-step#part-2-reacting-to-players-input
   */
 def opposite(direction: Direction): Direction =
   ???
