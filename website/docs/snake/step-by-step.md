@@ -68,6 +68,11 @@ same type (`Block`).
 
 Start by implementing the `eatsFruit` function.
 
+To test `eatsFruit`, run the following command in the sbt shell:
+```
+testOnly TestEatsFruit
+```
+
 You can then move to the `nextTail` functions which creates the new tail of the snake.
 To do this, we need to understand how the snake moves:
 
@@ -85,6 +90,11 @@ has eaten and it needs to grow, `isEating` is set to `true` otherwise, when it
 is `false` you need to implement the movement logic described above. Make sure
 you have a look at the [Scala basics] page to know how to manipulate lists.
 
+To test `nextTail`, run the following command in the sbt shell:
+```
+testOnly TestNextTail
+```
+
 ## Part 2: Reacting to player's input
 
 You will now implement two functions, `opposite` and `nextDirection` so that you
@@ -95,6 +105,11 @@ Start with `opposite`, which you will need for `nextDirection`. This function
 returns the direction which is opposite to the one it receives. So for example
 if it receives `Direction.Left` it will produce `Direction.Right`.  Use pattern
 matching (as described in [Scala basics])
+
+To test `opposite`, run the following command in the sbt shell:
+```
+testOnly TestOpposite
+```
 
 After that you can move to `nextDirection`. Here you will use pattern matching again,
 this time on `Option`, to compute the next direction of the snake.
@@ -107,6 +122,11 @@ direction, you must keep the current direction.
 
 ![not all directions are possible](/img/snake/nextdirection.png)
 
+To test `nextDirection`, run the following command in the sbt shell:
+```
+testOnly TestNextDirection
+```
+
 ## Part 3: Moving the head
 
 In this part you will update the next position of the head of the snake.
@@ -118,6 +138,10 @@ of the `wrapX` function:
 
 ![wrapx](/img/snake/wrapx.png)
 
+To test `wrapY`, run the following command in the sbt shell:
+```
+testOnly TestWrap
+```
 
 You can now work on the `nextHead` function. Its goal is to create the new head
 of the `snake` it receives as argument. The position of the new head will depend
@@ -129,12 +153,22 @@ the `y` component while the `x` component stays unchanged.
 
 You will need the `wrapY` and `wrapX` functions in `nextHead`.
 
+To test `nextHead`, run the following command in the sbt shell:
+```
+testOnly TestNextHead
+```
+
 ## Part 4: Updating the Snake
 
 You now have all the functions required to update the direction, head and tail
 of the snake.  Use them in `nextSnake` to create the snake updated for the next
 period. In [Scala basics] you will find how to combine `head` and `tail` to
 create a new `body`
+
+To test `nextSnake`, run the following command in the sbt shell:
+```
+testOnly TestNextSnake
+```
 
 ## Part 5: Updating the world
 
@@ -148,6 +182,11 @@ fruit.
 
 With the new snake and new fruit, you can return a new `World` (its size remains unchanged).
 
+To test `nextWorld`, run the following command in the sbt shell:
+```
+testOnly TestNextWorld
+```
+
 ## Part 6: Updating the game
 
 In this last part you will handle a few possible events in the game.
@@ -157,11 +196,22 @@ itself.
 
 ![game over](/img/snake/bititself.png)
 
+To test `bitItself`, run the following command in the sbt shell:
+```
+testOnly TestBitItself
+```
+
 This function is used in `updateGame` to check if the game is over
 
 Finally you can implement the last three cases of the pattern match in
 `updateGame`: if the user presses `p` the game is paused and the world does not
 change.  Otherwise you can use the functions previously developed to update the
 `World`
+
+To test `updateGame`, run the following command in the sbt shell:
+```
+testOnly TestUpdateGame
+```
+
 
 [Scala basics]: docs/snake/scala-basics
