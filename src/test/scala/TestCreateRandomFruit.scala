@@ -8,5 +8,5 @@ class TestCreateRandomFruit extends munit.FunSuite:
       assert(fruit.block.x >= 0)
       assert(fruit.block.x < worldSize.width)
       assert(fruit.block.y >= 0)
-      assert(fruit.block.y <= worldSize.height)
+      assert(fruit.block.y < worldSize.height)
   }
