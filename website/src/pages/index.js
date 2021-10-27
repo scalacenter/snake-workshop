@@ -27,7 +27,7 @@ function HomepageHeader() {
           </Link>
           <Link
             className={`${styles.button} button button--secondary button--lg`}
-            to="/docs/installation/intro">
+            to="/docs/snake/setup">
             Snake Game 🐍
           </Link>
         </div>

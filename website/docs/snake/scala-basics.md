@@ -1,4 +1,8 @@
-# Introduction to Scala
+---
+sidebar_position: 2
+---
+
+# Scala Basics
 
 This page provides an overview of the Scala language features required to complete
 the workshop.
