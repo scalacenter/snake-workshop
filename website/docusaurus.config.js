@@ -55,6 +55,11 @@ const config = {
             label: 'Snake Game',
           },
           {
+            to: 'gamepage',
+            label: 'Demo',
+            position: 'left'
+          },
+          {
             href: 'https://github.com/scalacenter/snake-workshop',
             label: 'GitHub',
             position: 'right',
@@ -116,6 +121,9 @@ const config = {
         additionalLanguages : ['java', 'scala', 'batch']
       },
     }),
+    scripts: [
+      'js/snakeMain.js'
+    ]
 };
 
 module.exports = config;

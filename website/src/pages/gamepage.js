@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from '@theme/Layout';
 
 function Game() {
+  const canvasRef = React.useRef(null);
+  React.useEffect(() =>
+    snakeMain(canvasRef.current)
+  )
   return (
     <Layout title="Game">
       <canvas
-        id="canvas"
-        height="300"
-        width="300"
+        ref={canvasRef}
+        height="600"
+        width="600"
         style={{"backgroundColor": "#3e3e3e"}}>
        </canvas>
-       <ScriptTag type="text/javascript" src="static/js/game.js"/>
     </Layout>
   );
 }
