@@ -54,9 +54,9 @@ def gameLoop(holder: ContextHolder) =
 
 end gameLoop
 
-@main def run =
+@scalajs.js.annotation.JSExportTopLevel("snakeMain")
+def run(canvas: html.Canvas) =
   // helpers for the rendering context for the canvas element in index.html
-  val canvas = document.getElementById("canvas").asInstanceOf[html.Canvas]
   val ctx = canvas.getContext("2d").asInstanceOf[CanvasRenderingContext2D]
   val holder = ContextHolder(ctx)
 
