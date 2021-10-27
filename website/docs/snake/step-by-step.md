@@ -27,6 +27,10 @@ in other words, each object of type `World` is a photograph of the state of the
 game. It contains a snake, a fruit, and the dimensions of the world (width and
 height).
 
+A snake is made up of blocks, or nodes. Each node has `x` and `y` coordinates.
+All of the nodes of a snake are collected into a list.  The snake also contains
+the direction in which it is moving.
+
 The goal of this workshop is to implement the `updateGame` function which,
 provided the previous state of the game and the action of the player, returns
 the next state of the world.

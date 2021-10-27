@@ -3,6 +3,34 @@
 This page provides an overview of the Scala language features required to complete
 the workshop.
 
+## Values
+
+In Scala you can assign values to names using `val`:
+
+```scala
+val aNumber = 3
+```
+Optionally, you can explicitly assign a type to the val:
+```scala
+val aNumber: Int = 3
+```
+
+## Definitions
+
+Functions can be defined with `def`:
+
+```
+def functionName(argument: TypeOfARgument): TypeOfReturn =
+  body
+```
+
+for example
+
+```scala
+def sum(a: Int, b: Int): Int =
+  a + b
+```
+
 ## Case classes
 
 Case classes are used two create new types combining existing ones.
@@ -22,18 +50,15 @@ val block = Block(1, 2)
 
 If you have a block, you can read its `x` and `y` attributes using `block.x` and `block.y`.
 
-## Snake
+## Enums
 
-A snake is made up of blocks, or nodes. Each node has an `x` and `y` coordinates.
-All of the nodes of a snake are collected into a list.
-The snake also contains the direction in which it is moving.
-
-`Direction` is an `enum`:
+`enum` can be used to define a type which a finite set of named values. For example:
 
 ```scala
 enum Direction:
   case Up, Down, Left, Right
 ```
+
 This means that any `Direction` can take only one of the values `Up`, `Down`, `Left` or `Right`.
 
 The only way to create a `Direction` is to access one of the cases:
@@ -74,34 +99,6 @@ List(1, 2, 3).dropRight(2) // res0: List[Int] = List(1)
  - You can obtain a list without the first *n* elements with `.drop`:
 ```scala
 List(1, 2, 3).drop(2) // res0: List[Int] = List(3)
-```
-
-## Values
-
-In Scala you can assign values to names using `val`:
-
-```scala
-val aNumber = 3
-```
-Optionally, you can explicitly assign a type to the val:
-```scala
-val aNumber: Int = 3
-```
-
-## Definitions
-
-Functions can be defined with `def`:
-
-```
-def functionName(argument: TypeOfARgument): TypeOfReturn =
-  body
-```
-
-for example
-
-```scala
-def sum(a: Int, b: Int): Int =
-  a + b
 ```
 
 ## If expressions
