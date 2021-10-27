@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[79],{7021:function(e,t,n){n.r(t);var r=n(7294),u=n(3938);t.default=function(){var e=r.useRef(null);return r.useEffect((function(){return snakeMain(e.current)})),r.createElement(u.Z,{title:"Game"},r.createElement("canvas",{ref:e,height:"600",width:"600",style:{backgroundColor:"#3e3e3e"}}))}}}]);
