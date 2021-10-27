@@ -14,25 +14,27 @@ This page is reserved for **Windows** users. Instructions for other operating sy
 
 Coursier is the Scala artifact fetcher, we will use it to install the standard Scala toolbox.
 
-#### 1. Download Visual C++ Redistribuable from [Microsoft website](https://www.microsoft.com/en-us/download/details.aspx?id=48145).
+#### 1. Go to [Microsoft website](https://www.microsoft.com/en-us/download/details.aspx?id=48145) and click the `Download` button.
+
+#### 2. Select `vc_redist.x64.exe` and click `Next` to download Visual C++ redistribuable.
 
 ![Download vc_redist.x64.exe](/img/installation/windows/redist.png)
 
-#### 2. Execute the downloaded `VC_redist.x64.exe` and follow the installation steps:
+#### 3. Execute the downloaded `VC_redist.x64.exe` and follow the installation steps:
 - Agree the license terms and conditions
 - Click Install
 
-#### 3. Open the Command Prompt.
+#### 4. Open the Command Prompt.
 
 ![Open Command Prompt](/img/installation/windows/cmd.png)
 
-#### 4. In the Command Prompt, download the `cs.exe` file:
+#### 5. In the Command Prompt, download the `cs.exe` file:
 
 ```batch
 bitsadmin /transfer cs-cli https://git.io/coursier-cli-windows-exe "%cd%\cs.exe"
 ```
 
-#### 5. Execute the `cs.exe` file to setup scala:
+#### 6. Execute the `cs.exe` file to setup scala:
 
 ```batch
 .\cs setup --yes
