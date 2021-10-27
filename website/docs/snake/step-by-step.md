@@ -6,7 +6,7 @@ The code is written in three files:
 
  - `src/main/scala/Snake.scala`: logic of the game, **you will work only this file**
  - `src/main/scala/Launcher.scala`: logic to start the game. This file is provided
- - `src/main/scala/Draw.scala`: logic to draw the terrain and snake on the screen. This file is provided
+ - `src/main/scala/Painter.scala`: logic to draw the terrain and snake on the screen. This file is provided
  - `index.html`: the web page that contains the game. Open this file in Firefox/Chrome/Safari to play
 
 ## How to compile and run
@@ -27,9 +27,9 @@ in other words, each object of type `World` is a photograph of the state of the
 game. It contains a snake, a fruit, and the dimensions of the world (width and
 height).
 
-A snake is made up of blocks, or nodes. Each node has `x` and `y` coordinates.
-All of the nodes of a snake are collected into a list.  The snake also contains
-the direction in which it is moving.
+A snake is made up of blocks. Each block has `x` and `y` coordinates.  All of
+the blocks of a snake are collected into a list.  The snake also contains the
+direction in which it is moving.
 
 The goal of this workshop is to implement the `updateGame` function which,
 provided the previous state of the game and the action of the player, returns
@@ -58,12 +58,12 @@ grid are specified in the `size` attribute of the case class
 
 ![world example](/img/snake/worldexample.png)
 
-## Part 1: growing the snake
+## Part 1: Growing the snake
 
 Here you will implement the eating logic of the snake.  If the snake's head
-comes in contact with the fruit, then it grows of one block.  To check if the
-head (a `Block`) is contact with the fruit, we can compare it with the position
-of the fruit (a `Block` as well.).  Remark that we compare two objects with the
+comes in contact with the fruit, then its tail grows one block in length.  To check if the
+head (a `Block`) is in contact with the fruit, we can compare it with the position
+of the fruit (its underlying `Block`).  Remark that we are comparing two objects with the
 same type (`Block`).
 
 Start by implementing the `eatsFruit` function.
@@ -103,49 +103,50 @@ to adopt the direction in it. Otherwise you maintain (return) the current direct
 
 You need to be careful: at any time the snake can adopt three new directions,
 **the head cannot go inside the body**. If the user requests this impossible
-direction,you will keep the current direction.
+direction, you must keep the current direction.
 
 ![not all directions are possible](/img/snake/nextdirection.png)
 
 ## Part 3: Moving the head
 
-In this part you will work on the `nextHead` function. Its goal is to create the
-new head of the `snake` it receives as argument. The position of the new head
-will depend on the argument `nextDirection`. You will create a new `Block` with
-the `x` and `y` attributes derived from those of the head of the snake.
-Remember the example grid at the benning of this page: going right means
-increasing the `x` component while the `y` component stays unchanged; going down
-means increasing the `y` component while the `x` component stays unchanged.
+In this part you will update the next position of the head of the snake.
 
-After that implement the `wrapY` function, similarly to the `wrapX` above it.
+First, implement the `wrapY` function, similarly to the `wrapX` above it.
 This functions is needed so that when the snake goes against the top border of
 the grid, it appears on the bottom of the grid going up.  You can see an example
 of the `wrapX` function:
 
-
 ![wrapx](/img/snake/wrapx.png)
 
-You can now use the `wrapY` and `wrapX` functions in `nextHead`.
 
-[Scala basics]: ../scala-basics.md
+You can now work on the `nextHead` function. Its goal is to create the new head
+of the `snake` it receives as argument. The position of the new head will depend
+on the argument `nextDirection`. You will create a new `Block` with the `x` and
+`y` attributes derived from those of the head of the snake.  Remember the
+example grid at the beginning of this page: going right means increasing the `x`
+component while the `y` component stays unchanged; going down means increasing
+the `y` component while the `x` component stays unchanged.
+
+You will need the `wrapY` and `wrapX` functions in `nextHead`.
 
 ## Part 4: Updating the Snake
 
 You now have all the functions required to update the direction, head and tail
 of the snake.  Use them in `nextSnake` to create the snake updated for the next
-period.
+period. In [Scala basics] you will find how to combine `head` and `tail` to
+create a new `body`
 
 ## Part 5: Updating the world
 
 The only moving parts of `World` are `snake` and `fruit`. In parts 1 to 4 you
-developed the tools to detect if the snake is eating and to update it.  Use them
+developed the tools to detect if the snake is eating and to update its attributes.  Use them
 in `nextWorld` to update the snake.
 
 You also need to update the fruit: if the snake ate it, create a new one using
 the provided function `createRandomFruit`, otherwise you can reuse the existing
 fruit.
 
-With the new snake and new fruit, you can return a new `World`.
+With the new snake and new fruit, you can return a new `World` (its size remains unchanged).
 
 ## Part 6: Updating the game
 
@@ -162,3 +163,5 @@ Finally you can implement the last three cases of the pattern match in
 `updateGame`: if the user presses `p` the game is paused and the world does not
 change.  Otherwise you can use the functions previously developed to update the
 `World`
+
+[Scala basics]: ../scala-basics.md

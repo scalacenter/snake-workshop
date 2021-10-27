@@ -15,12 +15,17 @@ Optionally, you can explicitly assign a type to the val:
 val aNumber: Int = 3
 ```
 
+Scala is a statically typed language: every valu has a type. Types help us to
+detect mistakes early, during compilation, rather than later, when the program
+is used. When we do not specify the type for a `val` Scala *guesses*, or infers,
+an appropriate type
+
 ## Definitions
 
 Functions can be defined with `def`:
 
 ```
-def functionName(argument: TypeOfARgument): TypeOfReturn =
+def functionName(argument: TypeOfArgument): TypeOfReturn =
   body
 ```
 
@@ -33,7 +38,7 @@ def sum(a: Int, b: Int): Int =
 
 ## Case classes
 
-Case classes are used two create new types combining existing ones.
+A case class is used to create a new type combining already existing ones.
 For example `Block` indicates a block in the Snake game and contains the `x` and `y` 
 coordinates of the block.
 
@@ -49,6 +54,11 @@ val block = Block(1, 2)
 ```
 
 If you have a block, you can read its `x` and `y` attributes using `block.x` and `block.y`.
+If you prefer, you can specify the variable name when you create a case class instance:
+
+```scala
+val block = Block(x=1, y=2)
+```
 
 ## Enums
 
@@ -69,7 +79,7 @@ val right = Direction.Right
 
 ## List
 
-A list is a sequence of values. `List[Node]` means that all the elements of the list are a `Node`.
+A list is a sequence of values. `List[Block]` means that all the elements of the list are a `Block`.
 Here are a few useful operations on lists:
 
  - You can obtain the length of the list with `.length`: 
@@ -122,7 +132,8 @@ def binary(x: Int): String =
 
 ## Pattern matching
 
-Finally, Scala supports pattern matching. This feature accepts many syntaxes but for this workshop we will use it only on simple enums.
+Finally, Scala supports pattern matching. This feature accepts many syntaxes but
+for this workshop we will use only with `enum`, `Option` and case classes.
 
 ```scala
 def directionToString(direction: Direction): String =
@@ -134,12 +145,12 @@ def directionToString(direction: Direction): String =
 ```
 
 After `List`, another common type in Scala is `Option[T]` which is used to express that a `T` might not be provided.
-For example in `Snake.scala`, `onTick` is called periodically to advance the game.
+For example in `Snake.scala`, `updateGame` is called periodically to advance the game.
 During that time the user might have pressed a button or not.
 You can use pattern matching to process `Option`s:
 
 ```scala
-def pnOnOption(maybeNumber: Option[Int]): String
+def matchOptionExample(maybeNumber: Option[Int]): String
   maybeNumber match
     case Some(number) => "I received number " + number
     case None => "I did not receive any number"
