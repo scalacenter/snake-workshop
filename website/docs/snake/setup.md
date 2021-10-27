@@ -47,7 +47,7 @@ sbt
 #### 10. In the sbt shell, compile the JavaScript file:
 
 ```bash
-fastOptJS
+fastLinkJS
 ```
 
 #### 11. Copy the path of the `index.html` file :
@@ -58,7 +58,10 @@ fastOptJS
 
 You should see a big grey square.
 
-#### 13. In the browser, hit F12 to open the console:
+#### 13. In the browser open the console:
+- `F12` or `Ctrl + Shift + J` in Firefox or Chrome
+- `F12` on Internet Explorer or Edge
+- `Right-Click`+`Console` on Safari
 
 An error is printed repeateadly.
 
