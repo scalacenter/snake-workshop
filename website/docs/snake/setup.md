@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Project setup
+# Project Setup
 
 #### 1. Go to the [scalacenter/snake-workshop](https://github.com/scalacenter/snake-workshop) page on Github:
 

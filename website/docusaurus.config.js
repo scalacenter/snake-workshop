@@ -49,6 +49,12 @@ const config = {
             label: 'Install Party',
           },
           {
+            type: 'doc',
+            docId: 'snake/setup',
+            position: 'left',
+            label: 'Snake Game',
+          },
+          {
             href: 'https://github.com/scalacenter/snake-workshop',
             label: 'GitHub',
             position: 'right',
