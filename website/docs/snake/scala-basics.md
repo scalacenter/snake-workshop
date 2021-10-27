@@ -52,7 +52,7 @@ If you have a block, you can read its `x` and `y` attributes using `block.x` and
 
 ## Enums
 
-`enum` can be used to define a type which a finite set of named values. For example:
+`enum` can be used to define a type with a finite set of named values. For example:
 
 ```scala
 enum Direction:
