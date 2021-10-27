@@ -6,7 +6,7 @@ sidebar_position: 1
 
 :::caution
 This page is reserved for **Mac** users. Instructions for other operating system can be found in:
-- [**Install - Linuw**](../linux/scala-setup)
+- [**Install - Linux**](../linux/scala-setup)
 - [**Install - Windows**](../windows/scala-setup)
 :::
 
