@@ -80,7 +80,7 @@ def wrapY(worldSize: Size, y: Int): Int =
 
 /** Returns the head of the snake in the next frame of the game.
   *
-  * The snakes next head should be translated by one block in the direction indicated, considering the world's
+  * The snake's next head should be translated by one block in the direction indicated, considering the world's
   * boundaries.
   *
   * hint: the rules for movement are given in the workshop instructions.
