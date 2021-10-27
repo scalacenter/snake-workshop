@@ -24,7 +24,7 @@ an appropriate type
 
 Functions can be defined with `def`:
 
-```
+```scala
 def functionName(argument: TypeOfArgument): TypeOfReturn =
   body
 ```
