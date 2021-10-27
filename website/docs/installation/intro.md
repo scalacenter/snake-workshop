@@ -51,7 +51,7 @@ It has a special command `setup` that installs:
 - **sbt**: the most used Scala build tool
 - and others: ammonite, sbtn...
 
-calac and scala are the primitive tools of the Scala toolbox.
+scalac and scala are the primitive tools of the Scala toolbox.
 We won't use them directly.
 Instead we will use the sbt build tool which uses scalac and scala underneath.
 
