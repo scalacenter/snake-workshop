@@ -19,7 +19,7 @@ Optionally, you can explicitly assign a type to the val:
 val aNumber: Int = 3
 ```
 
-Scala is a statically typed language: every valu has a type. Types help us to
+Scala is a statically typed language: every value has a type. Types help us to
 detect mistakes early, during compilation, rather than later, when the program
 is used. When we do not specify the type for a `val` Scala *guesses*, or infers,
 an appropriate type
@@ -137,7 +137,7 @@ def binary(x: Int): String =
 ## Pattern matching
 
 Finally, Scala supports pattern matching. This feature accepts many syntaxes but
-for this workshop we will use only with `enum`, `Option` and case classes.
+for this workshop we will only use it with `enum`, `Option` and case classes.
 
 ```scala
 def directionToString(direction: Direction): String =
