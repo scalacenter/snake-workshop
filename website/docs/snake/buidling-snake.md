@@ -27,7 +27,7 @@ The state of the game at any given time is represented by the `World` case class
 case class World(snake: Snake, fruit: Fruit, size: Size)
 ```
 
-in other words, each object of type `World` is a photograph of the state of the
+In other words, each object of type `World` is a photograph of the state of the
 game. It contains a snake, a fruit, and the dimensions of the world (width and
 height).
 
@@ -77,13 +77,13 @@ To test `eatsFruit`, run the following command in the sbt shell:
 testOnly TestEatsFruit
 ```
 
-You can then move to the `nextTail` functions which creates the new tail of the snake.
+You can then move to the `nextTail` function which creates the new tail of the snake.
 To do this, we need to understand how the snake moves:
 
 ![movement](/img/snake/movement.png)
 
-at each step, the head of the snake is computed (you will do this in Part 3).
-The new head is added at beginning of the `body` list of the snake.  Then the
+At each step, the head of the snake is computed (you will do this in Part 3).
+The new head is added at the beginning of the `body` list of the snake.  Then the
 last block of the snake is removed to obtain the illusion of movement: the
 number of blocks is constant but the position has changed. When the snake has
 eaten a fruit, we still need to compute a new head, but the number of blocks
