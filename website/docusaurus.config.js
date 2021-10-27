@@ -39,7 +39,7 @@ const config = {
         title: 'Snake Workshop',
         logo: {
           alt: 'Snake',
-          src: 'img/logo.svg',
+          src: 'img/snake.png',
         },
         items: [
           {
@@ -75,6 +75,10 @@ const config = {
                 href: 'https://stackoverflow.com/questions/tagged/scala',
               },
               {
+                label: 'Discord',
+                href: 'https://discord.gg/pNUuM4gA'
+              },
+              {
                 label: 'Gitter',
                 href: 'https://gitter.im/scala/center',
               },
@@ -88,8 +92,8 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Website',
-                to: 'https://scala.epfl.ch/',
+                label: 'Scala Center',
+                href: 'https://scala.epfl.ch/',
               },
               {
                 label: 'GitHub',
