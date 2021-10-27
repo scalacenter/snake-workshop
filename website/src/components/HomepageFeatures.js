@@ -1,62 +1,47 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './HomepageFeatures.module.css';
-
-const FeatureList = [
-  {
-    title: 'Easy to Use',
-    Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
-    description: (
-      <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
-      </>
-    ),
-  },
-  {
-    title: 'Focus on What Matters',
-    Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
-    description: (
-      <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
-      </>
-    ),
-  },
-  {
-    title: 'Powered by React',
-    Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
-    description: (
-      <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
-      </>
-    ),
-  },
-];
-
-function Feature({Svg, title, description}) {
-  return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} alt={title} />
-      </div>
-      <div className="text--center padding-horiz--md">
-        <h3>{title}</h3>
-        <p>{description}</p>
-      </div>
-    </div>
-  );
-}
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
       <div className="container">
         <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
-          ))}
+          <div className={clsx('col col--4')}>
+            <div className="text--center">
+              <img src={useBaseUrl('/img/scala-icon.png')} className={styles.featureSvg} alt="Credit to https://github.com/OlegIlyenko/scala-icon" />
+            </div>
+            <div className="text--center padding-horiz--md">
+              <h3>Learn Scala 3</h3>
+              <p>
+                  A simpler, safer and more concise version of Scala,
+                  the famous object-oriented and functionnal programming language.
+              </p>
+            </div>
+          </div>
+          <div className={clsx('col col--4')}>
+            <div className="text--center">
+              <img src={useBaseUrl('/img/screenshot.png')} className={styles.featureSvg} />
+            </div>
+            <div className="text--center padding-horiz--md">
+              <h3>Build a Snake Game</h3>
+              <p>
+                  Explore the concept of programming, hack the code and create your own Snake game.
+              </p>
+            </div>
+          </div>
+          <div className={clsx('col col--4')}>
+            <div className="text--center">
+              <img src={useBaseUrl('/img/community.png')} className={styles.featureSvg} />
+            </div>
+            <div className="text--center padding-horiz--md">
+              <h3>Have fun</h3>
+              <p>
+                  Meet people and share your passion for coding.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
