@@ -164,4 +164,4 @@ Finally you can implement the last three cases of the pattern match in
 change.  Otherwise you can use the functions previously developed to update the
 `World`
 
-[Scala basics]: ../scala-basics.md
+[Scala basics]: docs/snake/scala-basics
