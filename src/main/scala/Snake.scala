@@ -99,11 +99,19 @@ def wrapY(worldSize: Size, y: Int): Int =
 
 /** Returns the head of the snake in the next frame of the game.
   *
-  * The snakes next head should be translated in either the x, or y axis by 1 block, in the direction indicated
-  * by `nextDirection`. If the snakes head would go beyond the boundary of the world, indicated by `worldSize` it
-  * should instead wrap back to the 0 position of the axis it is travelling into.
+  * The snakes next head should be translated in either the x, or y axis by 1 block, in the direction indicated. If the
+  * snakes head would go beyond any boundary of the world, it should instead wrap back to the 0 position of the axis it
+  * is travelling into.
   *
-  * hint: ???
+  *   - up should move 0 in the x-axis and -1 in the y-axis
+  *   - down should move 0 in the x-axis and +1 in the y-axis
+  *   - left should move -1 in the x-axis and 0 in the y-axis
+  *   - right should move +1 in the x-axis and 0 in the y-axis
+  *
+  * hint: the direction the snake's head should travel along is given by `nextDirection`. The snakes head is given by
+  * the `head` method of the snake's `body` field. Pattern match on `nextDirection` and return a new `Block` that has
+  * moved relative the the snakes's head in that direction by following the above rules. Use `wrapX` and `wrapY` to
+  * ensure that the new `Block` does not move beyond the world boundary, given by `worldSize`.
   */
 def nextHead(snake: Snake, nextDirection: Direction, worldSize: Size): Block =
   val head = snake.body.head
@@ -115,6 +123,14 @@ def nextHead(snake: Snake, nextDirection: Direction, worldSize: Size): Block =
 
 // ******** Part 4 ********
 
+/** Returns the snake in the next frame of the game.
+  *
+  * This function computes the new direction of the snake, considering an optional input direction; the new head of the
+  * snake, given its new direction, and fitting within the world's boundary; and the new tail of the snake, which varies
+  * depending on if the snake is eating a fruit or not.
+  *
+  * hint: ???
+  */
 def nextSnake(snake: Snake, inputDirection: Option[Direction], isEating: Boolean, worldSize: Size): Snake =
   val newDir = nextDirection(snake.direction, inputDirection)
   val newHead = nextHead(snake, newDir, worldSize)
