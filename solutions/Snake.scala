@@ -1,3 +1,5 @@
+// This file contains the Solutions to the workshop, only look at this as a last resort.
+
 import scala.util.Random
 
 case class Block(x: Int, y: Int)
@@ -32,7 +34,7 @@ def score(world: World): Int = world.snake.body.length - 1
   * first element) described in the "Introduction to Scala" page of the website.
   */
 def eatsFruit(snake: Snake, fruit: Fruit): Boolean =
-  ???
+  fruit.block == snake.body.head
 
 /** Returns the tail of the snake in the next frame of the game.
   *
@@ -42,7 +44,8 @@ def eatsFruit(snake: Snake, fruit: Fruit): Boolean =
   * hint: look up "If expressions" in the "Introduction to Scala" page of the website.
   */
 def nextTail(snake: Snake, isEating: Boolean): List[Block] =
-  ???
+  if isEating then snake.body
+  else snake.body.dropRight(1)
 
 // ******** Part 2 - Reacting to player's input, changing the snake's direction ********
 
@@ -51,7 +54,11 @@ def nextTail(snake: Snake, isEating: Boolean): List[Block] =
   * hint: look up "Pattern matching" in the "Introduction to Scala" page of the website.
   */
 def opposite(direction: Direction): Direction =
-  ???
+  direction match
+    case Direction.Up    => Direction.Down
+    case Direction.Down  => Direction.Up
+    case Direction.Left  => Direction.Right
+    case Direction.Right => Direction.Left
 
 /** Returns the new direction that the snake will face, depending on if input was provided.
   *
@@ -61,7 +68,12 @@ def opposite(direction: Direction): Direction =
   * hint: you will need to pattern match on `inputDirection`. A snake cannot turn into its own body.
   */
 def nextDirection(currentDirection: Direction, inputDirection: Option[Direction]): Direction =
-  ???
+  inputDirection match
+    case Some(newDirection) =>
+      if newDirection == opposite(currentDirection) then currentDirection
+      else newDirection
+    case None =>
+      currentDirection
 
 // ******** Part 3 - Moving the snake's head, based on its new direction ********
 
@@ -76,7 +88,9 @@ def wrapX(worldSize: Size, x: Int): Int =
   * hint: follow the model of `wrapX` and instead compare against the height.
   */
 def wrapY(worldSize: Size, y: Int): Int =
-  ???
+  if y >= worldSize.height then 0
+  else if y < 0 then worldSize.height - 1
+  else y
 
 /** Returns the head of the snake in the next frame of the game.
   *
@@ -86,7 +100,12 @@ def wrapY(worldSize: Size, y: Int): Int =
   * hint: the rules for movement are given in the workshop instructions.
   */
 def nextHead(snake: Snake, nextDirection: Direction, worldSize: Size): Block =
-  ???
+  val head = snake.body.head
+  nextDirection match
+    case Direction.Up    => Block(x = head.x, y = wrapY(worldSize, head.y - 1))
+    case Direction.Down  => Block(x = head.x, y = wrapY(worldSize, head.y + 1))
+    case Direction.Left  => Block(x = wrapX(worldSize, head.x - 1), y = head.y)
+    case Direction.Right => Block(x = wrapX(worldSize, head.x + 1), y = head.y)
 
 // ******** Part 4 - Updating the snake, based on user input and if it ate the fruit ********
 
@@ -98,7 +117,10 @@ def nextHead(snake: Snake, nextDirection: Direction, worldSize: Size): Block =
   * hint: use the functions you implemented above to compute the new attributes of the snake.
   */
 def nextSnake(snake: Snake, inputDirection: Option[Direction], isEating: Boolean, worldSize: Size): Snake =
-  ???
+  val newDir = nextDirection(snake.direction, inputDirection)
+  val newHead = nextHead(snake, newDir, worldSize)
+  val newTail = nextTail(snake, isEating)
+  Snake(newDir, newHead :: newTail)
 
 // ******** Part 5 - Updating the world, based on user input ********
 
@@ -120,7 +142,10 @@ def createRandomFruit(worldSize: Size): Fruit =
   * implemented above to test if the fruit was eaten, and to create the new snake.
   */
 def nextWorld(world: World, inputDirection: Option[Direction]): World =
-  ???
+  val isEating: Boolean = eatsFruit(world.snake, world.fruit)
+  val newSnake: Snake = nextSnake(world.snake, inputDirection, isEating, world.size)
+  val newFruit: Fruit = if isEating then createRandomFruit(world.size) else world.fruit
+  World(newSnake, newFruit, world.size)
 
 // ******** Part 6 - Updating the game, based on user input ********
 
@@ -131,7 +156,7 @@ def nextWorld(world: World, inputDirection: Option[Direction]): World =
   * hint: Lookup the available `List` methods in the "Introduction to Scala" page of the website.
   */
 def bitItself(snake: Snake): Boolean =
-  ???
+  snake.body.tail.contains(snake.body.head)
 
 /** Returns either the next world of the current game, or GameOver, by inspecting the user input.
   *
@@ -148,8 +173,8 @@ def updateGame(world: World, input: Option[UserInput]): World | GameOver.type =
   input match
     case anyInput if bitItself(world.snake) => GameOver
     case Some(UserInput.Reset)              => GameOver
-    case Some(UserInput.Pause)              => ???
-    case Some(UserInput.Arrow(direction))   => ???
-    case None                               => ???
+    case Some(UserInput.Pause)              => world
+    case Some(UserInput.Arrow(direction))   => nextWorld(world, Some(direction))
+    case None                               => nextWorld(world, None)
 
 // ******** END ********
