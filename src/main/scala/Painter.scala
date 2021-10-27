@@ -1,3 +1,5 @@
+import org.scalajs.dom.CanvasRenderingContext2D
+
 class Painter(scale: Int):
 
   def paintWorld(world: World, holder: ContextHolder): Unit =
@@ -29,3 +31,12 @@ class Painter(scale: Int):
   private def paintSnake(snake: Snake, holder: ContextHolder): Unit =
     paintHead(snake.body.head, holder)
     paintTail(snake.body.tail, holder)
+
+/** Provides safe management of the rendering context */
+class ContextHolder(ctx: CanvasRenderingContext2D):
+
+  def use(op: CanvasRenderingContext2D => Unit): Unit =
+    try
+      ctx.save()
+      op(ctx)
+    finally ctx.restore()
