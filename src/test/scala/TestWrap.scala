@@ -1,3 +1,4 @@
+// > testOnly TestWrap
 class TestWrap extends munit.FunSuite:
   val size = Size(width = 23, height = 19)
 

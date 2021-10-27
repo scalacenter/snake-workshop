@@ -1,5 +1,6 @@
 import Direction.*
 
+// > testOnly TestUpdateGame
 class TestUpdateGame extends munit.FunSuite:
   val worldSize: Size = Size(30, 30)
   val snake = Snake(Right, List(Block(0, 0)))

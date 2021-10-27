@@ -1,5 +1,6 @@
 import Direction.*
 
+// > testOnly TestNextTail
 class TestNextTail extends munit.FunSuite:
 
   test("nexTail when snake didn't eat the fruit") {

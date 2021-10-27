@@ -1,5 +1,6 @@
 import Direction.*
 
+// > testOnly TestBitItself
 class TestBitItself extends munit.FunSuite:
 
   test("one node snake can't bit itself") {

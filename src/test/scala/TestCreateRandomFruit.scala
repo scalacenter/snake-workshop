@@ -1,3 +1,4 @@
+// > testOnly TestCreateRandomFruit
 class TestCreateRandomFruit extends munit.FunSuite:
   val worldSize = Size(30, 30)
 

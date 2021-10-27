@@ -1,5 +1,6 @@
 import Direction.*
 
+// > testOnly TestNextWorld
 class TestNextWorld extends munit.FunSuite:
 
   val worldSize = Size(30, 30)

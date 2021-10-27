@@ -1,5 +1,6 @@
 import Direction.*
 
+// > testOnly TestNextDirection
 class TestNextDirection extends munit.FunSuite:
 
   test("nextDirection when no user input") {

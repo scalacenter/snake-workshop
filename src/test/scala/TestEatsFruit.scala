@@ -1,5 +1,6 @@
 import Direction.*
 
+// > testOnly TestEatsFruit
 class TestEatsFruit extends munit.FunSuite:
   val snake = Snake(Left, List(Block(2, 0), Block(1, 0), Block(0, 0)))
 

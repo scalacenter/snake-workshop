@@ -1,5 +1,6 @@
 import Direction.*
 
+// > testOnly TestOpposite
 class TestOpposite extends munit.FunSuite:
 
   test("opposite UP") {
