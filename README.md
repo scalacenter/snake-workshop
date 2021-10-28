@@ -8,7 +8,7 @@ It uses Scala 3 and Scala.js.
 The final result of the game is: 
 ![screenshot](screenshot.png)
 
-The website of the workshop for the participants is: https://scalacenter.github.io/
+The website of the workshop for the participants is: https://scalacenter.github.io/snake-workshop
 
 ## Requirements
 
